@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="483" leftMargin="56" rightMargin="56" topMargin="56" bottomMargin="56" uuid="322294a8-88c3-4361-a6f7-e4548811f075">
+	<property name="ireport.zoom" value="1.7715610000000017"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT * FROM tipoproducto t order by nomtip;]]>
+	</queryString>
+	<field name="idTipoProducto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomtip" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="17" width="483" height="28" uuid="241cfe12-b450-471c-a191-8ce6134239c8"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUBROS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="1" y="41" width="464" height="20" uuid="a02db4c3-58e7-4a55-ad98-694055c31e7f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="48" y="44" width="417" height="14" uuid="3cf37c75-1e34-46c8-8581-1bca9c807ba4"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[LISTADO DE RUBROS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="47" y="41" width="1" height="20" uuid="331736fe-8265-487b-9611-5e688a6ae407"/>
+			</line>
+			<staticText>
+				<reportElement x="2" y="44" width="38" height="14" uuid="9f0da905-f01a-4d34-813c-519e59fef0b4"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[N°]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="1" y="0" width="464" height="20" uuid="4ddfaa0f-2ef4-4be7-8325-63db22175bc9"/>
+			</rectangle>
+			<textField>
+				<reportElement x="2" y="3" width="44" height="14" uuid="ed1bd955-7dce-4526-b902-a95f38b1fcde"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="48" y="3" width="417" height="14" uuid="1a078cf2-8942-4eb1-85c0-b069b038804c"/>
+				<textFieldExpression><![CDATA[$F{nomtip}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="47" y="0" width="1" height="20" uuid="701191c9-5a26-4c6d-8d30-b2a9094667fd"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="363" y="34" width="80" height="20" uuid="9b51aa6b-83bc-48e1-aa0d-c49b726fdba0"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="443" y="34" width="40" height="20" uuid="1241e2c3-4299-4f4a-b609-1d802720a03c"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="1" y="34" width="100" height="20" uuid="d8c192ec-53a2-4220-bdfa-14b87bf745c5"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

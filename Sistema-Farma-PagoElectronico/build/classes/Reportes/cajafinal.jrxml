@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cajafinal" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="72832e27-a954-4f30-9632-10cba945c1b6">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="54"/>
+	<parameter name="f_inicio" class="java.lang.String"/>
+	<parameter name="f_fin" class="java.lang.String"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="totalIngresos" class="java.lang.String"/>
+	<parameter name="totalEgresos" class="java.lang.String"/>
+	<parameter name="idsede" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\NetBeansProjects\\Sistema-Ferreteria\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select 2 from dual;]]>
+	</queryString>
+	<field name="2" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="39" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="10" width="555" height="20" uuid="0a8debca-5044-4146-9982-08ecbc027199"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="234" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="21" y="18" width="206" height="21" uuid="ae485d8a-4751-4eb5-b58e-2f58f3e97903"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Detalle de Ingresos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="22" y="138" width="222" height="21" uuid="81b3d0b3-a0a1-4511-b7d6-997aeb6394fc"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Detalle de Gastos:]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="1" y="115" width="554" height="1" uuid="335c95b8-ad03-4e59-9c78-c9f14943be5d"/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="115" width="100" height="20" uuid="dcb9abc2-63ce-4664-b2cc-2d7780244929"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Ingresos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="214" width="100" height="20" uuid="b9d997bc-39dd-4c21-9089-6703bf18ac82"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Egresos:]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="1" y="213" width="554" height="1" uuid="eebeaede-9598-40e0-89bc-8b2f56ecf857"/>
+			</line>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="39" width="555" height="35" uuid="00fcc5af-8264-4591-b5fb-e52fd309205c"/>
+				<subreportParameter name="idsede">
+					<subreportParameterExpression><![CDATA[$P{idsede}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f_inicio">
+					<subreportParameterExpression><![CDATA[$P{f_inicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f_fin">
+					<subreportParameterExpression><![CDATA[$P{f_fin}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="titulo">
+					<subreportParameterExpression><![CDATA[$P{titulo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "cajafinal_subreportIngresosVentas.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="78" width="555" height="33" uuid="5b742b61-fb78-43ec-8e34-7a45f3ab34ca"/>
+				<subreportParameter name="idsede">
+					<subreportParameterExpression><![CDATA[$P{idsede}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f_inicio">
+					<subreportParameterExpression><![CDATA[$P{f_inicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f_fin">
+					<subreportParameterExpression><![CDATA[$P{f_fin}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="titulo">
+					<subreportParameterExpression><![CDATA[$P{titulo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "cajafinal_subreportOtrosIngresos.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="158" width="555" height="27" uuid="909e9775-c4d9-4b68-a166-ad30ae328801"/>
+				<subreportParameter name="idsede">
+					<subreportParameterExpression><![CDATA[$P{idsede}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f_inicio">
+					<subreportParameterExpression><![CDATA[$P{f_inicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f_fin">
+					<subreportParameterExpression><![CDATA[$P{f_fin}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="titulo">
+					<subreportParameterExpression><![CDATA[$P{titulo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "cajafinal_subreportPagoProveedor.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="185" width="555" height="25" uuid="c479178d-8e0a-4d1c-9a31-d75c72ba11a1"/>
+				<subreportParameter name="idsede">
+					<subreportParameterExpression><![CDATA[$P{idsede}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f_inicio">
+					<subreportParameterExpression><![CDATA[$P{f_inicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f_fin">
+					<subreportParameterExpression><![CDATA[$P{f_fin}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="titulo">
+					<subreportParameterExpression><![CDATA[$P{titulo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "cajafinal_subreportOtrosGastos.jasper"]]></subreportExpression>
+			</subreport>
+			<textField pattern="S/ #,##0.00">
+				<reportElement positionType="Float" x="455" y="115" width="100" height="20" uuid="20bcf5b4-dfe5-4091-86d3-ef575ba0b28e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totalIngresos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="S/ #,##0.00">
+				<reportElement positionType="Float" x="455" y="214" width="100" height="20" uuid="c60dc23e-2143-42b5-997c-3c6a3781a159"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totalEgresos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

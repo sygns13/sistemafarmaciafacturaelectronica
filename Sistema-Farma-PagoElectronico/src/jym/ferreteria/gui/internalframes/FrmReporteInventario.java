@@ -1,0 +1,874 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jym.ferreteria.gui.internalframes;
+
+import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import jym.ferreteria.clases.Controlador;
+import jym.ferreteria.datasource.InventarioDataSource;
+import jym.ferreteria.renders.CustomTableModel;
+import jym.ferreteria.renders.LabelRenderer;
+import jym.ferreteria.renders.LateralTableHeader;
+
+/**
+ *
+ * @author Omr
+ */
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTextField;
+import jym.ferreteria.clases.Accesos;
+import static jym.ferreteria.gui.internalframes.FrmTopProductosVendidos.cboPresent;
+
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.BorderStyle;
+
+public class FrmReporteInventario extends javax.swing.JInternalFrame {
+
+    private Controlador control = new Controlador();
+    private CustomTableModel model = new CustomTableModel();
+    private Map mapAlmacen = new HashMap();
+    private Map mapUnidad = new HashMap();
+    private boolean comboAlmacenListo = false;
+    private boolean comboUnidadListo = false;
+    
+    private String idusu="";
+    
+    
+
+    /**
+     * Creates new form Inventario
+     */
+    public FrmReporteInventario() {
+        
+        initComponents();
+        userspeshal();
+        cboUnidad.setVisible(false);
+        jLabel2.setVisible(false);
+        control.fillComboBox("SELECT `idAlmacen`, `nombre` FROM `almacen`;", cboAlmacen, mapAlmacen, "Por cada almacén");
+        cboAlmacen.setSelectedIndex(1);
+        cboAlmacen.setVisible(false);
+        comboAlmacenListo = true;
+        control.fillComboBox("SELECT * FROM `unidades` ORDER BY `nomuniddes`;", cboUnidad, mapUnidad, "Todos");
+        comboUnidadListo = true;
+        this.setFrameIcon(new ImageIcon(this.getClass().getResource(Controlador.ICON_PATH)));
+        model.setColumnIdentifiers(new String[]{"N°","Codigo", "Nombre","Rubro","Composición","Presentación","Laboratorio", "Und", "Almacén","Stock", "Prec. Venta", "Prec. de Compra", "Ganancia","Prioridad","Ubicación"});
+        tablaInventario.setModel(model);
+        tablaInventario.setDefaultRenderer(Object.class, new LabelRenderer());
+        tablaInventario.getColumnModel().getColumn(0).setCellRenderer(new LateralTableHeader());
+        LabelRenderer labelRenderer = new LabelRenderer(SwingConstants.RIGHT);
+        tablaInventario.getColumnModel().getColumn(9).setCellRenderer(labelRenderer);
+        tablaInventario.getColumnModel().getColumn(10).setCellRenderer(labelRenderer);
+        tablaInventario.getColumnModel().getColumn(11).setCellRenderer(labelRenderer);
+        tablaInventario.getColumnModel().getColumn(12).setCellRenderer(labelRenderer);
+
+        control.tableWidthColumn(tablaInventario, 50, 0);
+        control.tableWidthColumn(tablaInventario, 300, 2);
+        control.tableWidthColumn(tablaInventario, 80, 13,14);
+         control.tableWidthColumn(tablaInventario, 180, 3,4,5,6);
+        tablaInventario.getColumnModel().getColumn(0).setMaxWidth(50);
+        control.tableMaxWidthColumn(tablaInventario, 100, 7, 8,9);
+        cargarFiltro();
+        cargarInventario();
+        
+        
+        
+
+    }
+    
+    public void userspeshal(){
+    idusu=Accesos.getInstance().getIdUsuario();
+    //System.out.println(idusu);
+    
+   // JOptionPane.showMessageDialog(null, idusu);
+            
+    if(idusu.equals("0")){
+    jLabel4.setVisible(false);
+    txtFechaDesde.setVisible(false);
+    jButton6.setVisible(false);
+    btnImprimir2.setVisible(false);
+    btnImprimir1.setVisible(false);
+    
+
+    }
+    }
+    
+    public void cargarFiltro(){
+    cbofiltro.removeAllItems();
+    
+    cbofiltro.addItem("Por Producto");      //0
+    cbofiltro.addItem("Por Rubro");         //1
+    cbofiltro.addItem("Por Presentación");  //2
+    cbofiltro.addItem("Por Composición");   //3
+    cbofiltro.addItem("Por Laboratorio");   //4
+    cbofiltro.addItem("Por Prioridad");     //5
+    cbofiltro.addItem("Por Ubicación");     //6
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaInventario = new javax.swing.JTable();
+        btnSalir = new javax.swing.JButton();
+        btnImprimir = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        cboAlmacen = new javax.swing.JComboBox();
+        cboUnidad = new javax.swing.JComboBox();
+        btnImprimir1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        cbofiltro = new javax.swing.JComboBox();
+        btnImprimir2 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtFechaDesde = new com.toedter.calendar.JDateChooser();
+        jButton6 = new javax.swing.JButton();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Inventario");
+        setPreferredSize(new java.awt.Dimension(1600, 600));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setText("Buscar: ");
+        jLabel1.setName("jLabel1"); // NOI18N
+
+        txtBuscar.setName("txtBuscar"); // NOI18N
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
+
+        tablaInventario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tablaInventario.setName("tablaInventario"); // NOI18N
+        tablaInventario.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tablaInventario);
+
+        btnSalir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jym/ferreteria/imagenes/salir.png"))); // NOI18N
+        btnSalir.setText("Salir");
+        btnSalir.setName("btnSalir"); // NOI18N
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
+        btnImprimir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jym/ferreteria/imagenes/Print.png"))); // NOI18N
+        btnImprimir.setText("Imprimir");
+        btnImprimir.setName("btnImprimir"); // NOI18N
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel2.setText("Unidad:");
+        jLabel2.setName("jLabel2"); // NOI18N
+
+        cboAlmacen.setName("cboAlmacen"); // NOI18N
+        cboAlmacen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboAlmacenActionPerformed(evt);
+            }
+        });
+
+        cboUnidad.setName("cboUnidad"); // NOI18N
+        cboUnidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboUnidadActionPerformed(evt);
+            }
+        });
+
+        btnImprimir1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnImprimir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jym/ferreteria/imagenes/Print.png"))); // NOI18N
+        btnImprimir1.setText("Imprimir Kardex General");
+        btnImprimir1.setName("btnImprimir1"); // NOI18N
+        btnImprimir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimir1ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel3.setText("Filtro de Búsqueda: ");
+        jLabel3.setName("jLabel3"); // NOI18N
+
+        cbofiltro.setName("cbofiltro"); // NOI18N
+        cbofiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbofiltroActionPerformed(evt);
+            }
+        });
+
+        btnImprimir2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnImprimir2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jym/ferreteria/imagenes/Print.png"))); // NOI18N
+        btnImprimir2.setText("Imprimir Kardex por Producto");
+        btnImprimir2.setName("btnImprimir2"); // NOI18N
+        btnImprimir2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimir2ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jym/ferreteria/imagenes/Excel2.png"))); // NOI18N
+        jButton5.setText("Exportar a Excel");
+        jButton5.setName("jButton5"); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Fecha de Búsqueda de Kardex: ");
+        jLabel4.setName("jLabel4"); // NOI18N
+
+        txtFechaDesde.setName("txtFechaDesde"); // NOI18N
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jym/ferreteria/imagenes/Actions-edit-delete-icon.png"))); // NOI18N
+        jButton6.setName("jButton6"); // NOI18N
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbofiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cboUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboAlmacen, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(342, 342, 342)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6)
+                        .addGap(42, 42, 42)
+                        .addComponent(btnImprimir2)
+                        .addGap(27, 27, 27)
+                        .addComponent(btnImprimir1)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(cboAlmacen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(cbofiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnImprimir1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnImprimir2)
+                        .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFechaDesde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        /*if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            cargarInventario();
+        }*/
+        cargarInventario();
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        imprimir();
+    }//GEN-LAST:event_btnImprimirActionPerformed
+
+    private void cboAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboAlmacenActionPerformed
+        if (comboAlmacenListo) {
+            cargarInventario();
+        }
+    }//GEN-LAST:event_cboAlmacenActionPerformed
+
+    private void cboUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboUnidadActionPerformed
+        if (comboUnidadListo) {
+            cargarInventario();
+        }
+    }//GEN-LAST:event_cboUnidadActionPerformed
+
+    private void btnImprimir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimir1ActionPerformed
+imprimirKardex();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnImprimir1ActionPerformed
+
+    private void cbofiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbofiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbofiltroActionPerformed
+
+    private void btnImprimir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimir2ActionPerformed
+ imprimirKardexProd();           // TODO add your handling code here:
+    }//GEN-LAST:event_btnImprimir2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        ExportarExcel();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        txtFechaDesde.setDate(null);
+       
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnImprimir;
+    private javax.swing.JButton btnImprimir1;
+    private javax.swing.JButton btnImprimir2;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox cboAlmacen;
+    private javax.swing.JComboBox cboUnidad;
+    private javax.swing.JComboBox cbofiltro;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaInventario;
+    private javax.swing.JTextField txtBuscar;
+    private com.toedter.calendar.JDateChooser txtFechaDesde;
+    // End of variables declaration//GEN-END:variables
+
+    private void cargarInventario() {
+        String sql = "";
+        String groupOrderBy = "";
+        String extra = "";
+
+        if (cboUnidad.getSelectedIndex() == 0) {//Todas las unidades
+            extra = "";       }
+        else {//Por unidad en específico
+            extra = " AND u.idunidades=" + mapUnidad.get(cboUnidad.getSelectedIndex()).toString();
+        }
+        
+        String fill="";
+        int filto=cbofiltro.getSelectedIndex();
+        
+        switch (filto) {
+            
+        case 0:
+            fill=" p.`nomproducto` LIKE '%"+ txtBuscar.getText()+"%'";
+        break;
+
+        case 1:
+            fill=" c.`nomtip` LIKE '%"+ txtBuscar.getText()+"%'";
+        break;
+        
+        case 2:
+            fill=" pre.`present` LIKE '%"+ txtBuscar.getText()+"%'";
+        break;
+        
+        case 3:
+            fill=" p.`composicion` LIKE '%"+ txtBuscar.getText()+"%'";
+        break;
+        
+        case 4:
+            fill=" m.`nommarc` LIKE '%"+ txtBuscar.getText()+"%'";
+        break;
+        
+        case 5:
+            fill=" p.`prioridad` LIKE '%"+ txtBuscar.getText()+"%'";
+        break;
+        
+        case 6:
+            fill=" p.`ubicacion` LIKE '%"+ txtBuscar.getText()+"%'";
+        break;
+
+        default:
+
+        fill="";
+
+        break;
+
+ 
+
+ }
+
+        if (cboAlmacen.getSelectedIndex() == 0) {//Por cada almacén
+            sql = "select ' ',p.codUnid, p.nomproducto, c.nomtip, p.composicion, pre.present, m.nommarc, un.nomuniddes, a.nombre, \n" +
+" s.cantidadDisponible, REPLACE(format(p.precUnidad,2), ',', ''), REPLACE(format(p.precioCompra,2), ',', '') ,REPLACE(format((p.precUnidad-p.precioCompra),2), ',', '') , \n" +
+" p.prioridad, p.ubicacion \n" +
+" from produto p \n" +
+" inner join tipoproducto c on c.idTipoProducto=p.idTipoProducto \n" +
+" inner join presentacion pre on pre.idPresentacion=p.idPresentacion \n" +
+" inner join marca m on m.idmarca=p.idmarca \n" +
+" inner join detunidprod u on u.idproducto=p.idproduto and idUnidades='1' \n" +
+" inner join unidades un on un.idUnidades=u.idunidades \n" +
+" inner join stock s on s.idProducto=p.idproduto inner join almacen a on a.idalmacen=s.idAlmacen \n" +
+" where \n" +fill;
+            extra += "";
+            groupOrderBy = " GROUP BY p.`idproduto`,a.`idAlmacen` ORDER BY  p.`idproduto`, a.`idAlmacen`;";
+        } else {//Por almacén en específico
+            sql = "select ' ',p.codUnid, p.nomproducto, c.nomtip, p.composicion, pre.present, m.nommarc, un.nomuniddes, a.nombre, \n" +
+" s.cantidadDisponible, REPLACE(format(p.precUnidad,2), ',', ''), REPLACE(format(p.precioCompra,2), ',', '') ,REPLACE(format((p.precUnidad-p.precioCompra),2), ',', '') , \n" +
+" p.prioridad, p.ubicacion \n" +
+" from produto p \n" +
+" inner join tipoproducto c on c.idTipoProducto=p.idTipoProducto \n" +
+" inner join presentacion pre on pre.idPresentacion=p.idPresentacion \n" +
+" inner join marca m on m.idmarca=p.idmarca \n" +
+" inner join detunidprod u on u.idproducto=p.idproduto and idUnidades='1' \n" +
+" inner join unidades un on un.idUnidades=u.idunidades \n" +
+" inner join stock s on s.idProducto=p.idproduto inner join almacen a on a.idalmacen=s.idAlmacen \n" +
+" where \n" +fill;
+
+            extra += " AND a.`idAlmacen`=" + mapAlmacen.get(cboAlmacen.getSelectedIndex()).toString();
+            groupOrderBy = " GROUP BY p.`idproduto`,a.`idAlmacen` ORDER BY  p.`idproduto`, a.`idAlmacen`;";
+        }
+
+        sql = sql + extra + groupOrderBy;
+        control.LlenarJTabla(model, sql, 15);
+    }
+    
+    
+    
+    public  void ExportarExcel(){
+        Workbook book = new XSSFWorkbook();
+        Sheet sheet=book.createSheet("Reporte Inventario");
+        
+        
+        CellStyle style3 = book.createCellStyle();
+        
+        style3.setBorderBottom(BorderStyle.MEDIUM);
+        style3.setBorderLeft(BorderStyle.MEDIUM);
+        style3.setBorderRight(BorderStyle.MEDIUM);
+        style3.setBorderTop(BorderStyle.MEDIUM);
+        
+      Row row0=sheet.createRow(1);
+      Cell celda0=row0.createCell(2);
+      celda0.setCellValue("Reporte de Inventario de Productos");
+      //celda0.setCellStyle(style3);
+      
+
+        String sql=" ";
+        String groupOrderBy = "";
+        String extra = "";
+
+        if (cboUnidad.getSelectedIndex() == 0) {//Todas las unidades
+            extra = "";       }
+        else {//Por unidad en específico
+            extra = " AND u.idunidades=" + mapUnidad.get(cboUnidad.getSelectedIndex()).toString();
+        }
+        
+        String fill="";
+        int filto=cbofiltro.getSelectedIndex();
+        
+        switch (filto) {
+            
+        case 0:
+            fill=" p.`nomproducto` LIKE '%"+ txtBuscar.getText()+"%'";
+        break;
+
+        case 1:
+            fill=" c.`nomtip` LIKE '%"+ txtBuscar.getText()+"%'";
+        break;
+        
+        case 2:
+            fill=" pre.`present` LIKE '%"+ txtBuscar.getText()+"%'";
+        break;
+        
+        case 3:
+            fill=" p.`composicion` LIKE '%"+ txtBuscar.getText()+"%'";
+        break;
+        
+        case 4:
+            fill=" m.`nommarc` LIKE '%"+ txtBuscar.getText()+"%'";
+        break;
+        
+        case 5:
+            fill=" p.`prioridad` LIKE '%"+ txtBuscar.getText()+"%'";
+        break;
+        
+        case 6:
+            fill=" p.`ubicacion` LIKE '%"+ txtBuscar.getText()+"%'";
+        break;
+
+        default:
+
+        fill="";
+
+        break;
+
+ 
+
+ }
+
+        if (cboAlmacen.getSelectedIndex() == 0) {//Por cada almacén
+            sql = "select ' ',p.codUnid, p.nomproducto, c.nomtip, p.composicion, pre.present, m.nommarc, un.nomuniddes, a.nombre, \n" +
+" s.cantidadDisponible, REPLACE(format(p.precUnidad,2), ',', ''), REPLACE(format(p.precioCompra,2), ',', '') ,REPLACE(format((p.precUnidad-p.precioCompra),2), ',', '') , \n" +
+" p.prioridad, p.ubicacion \n" +
+" from produto p \n" +
+" inner join tipoproducto c on c.idTipoProducto=p.idTipoProducto \n" +
+" inner join presentacion pre on pre.idPresentacion=p.idPresentacion \n" +
+" inner join marca m on m.idmarca=p.idmarca \n" +
+" inner join detunidprod u on u.idproducto=p.idproduto and idUnidades='1' \n" +
+" inner join unidades un on un.idUnidades=u.idunidades \n" +
+" inner join stock s on s.idProducto=p.idproduto inner join almacen a on a.idalmacen=s.idAlmacen \n" +
+" where \n" +fill;
+            extra += "";
+            groupOrderBy = " GROUP BY p.`idproduto`,a.`idAlmacen` ORDER BY  p.`idproduto`, a.`idAlmacen`;";
+        } else {//Por almacén en específico
+            sql = "select ' ',p.codUnid, p.nomproducto, c.nomtip, p.composicion, pre.present, m.nommarc, un.nomuniddes, a.nombre, \n" +
+" s.cantidadDisponible, REPLACE(format(p.precUnidad,2), ',', ''), REPLACE(format(p.precioCompra,2), ',', '') ,REPLACE(format((p.precUnidad-p.precioCompra),2), ',', '') , \n" +
+" p.prioridad, p.ubicacion \n" +
+" from produto p \n" +
+" inner join tipoproducto c on c.idTipoProducto=p.idTipoProducto \n" +
+" inner join presentacion pre on pre.idPresentacion=p.idPresentacion \n" +
+" inner join marca m on m.idmarca=p.idmarca \n" +
+" inner join detunidprod u on u.idproducto=p.idproduto and idUnidades='1' \n" +
+" inner join unidades un on un.idUnidades=u.idunidades \n" +
+" inner join stock s on s.idProducto=p.idproduto inner join almacen a on a.idalmacen=s.idAlmacen \n" +
+" where \n" +fill;
+
+            extra += " AND a.`idAlmacen`=" + mapAlmacen.get(cboAlmacen.getSelectedIndex()).toString();
+            groupOrderBy = " GROUP BY p.`idproduto`,a.`idAlmacen` ORDER BY  p.`idproduto`, a.`idAlmacen`;";
+        }
+
+        sql = sql + extra + groupOrderBy;
+       
+       System.out.print(sql);
+       ResultSet result = control.DevolverRegistro(sql);
+       
+       int cont=1;
+       String idProd="";
+       String codigo="";
+       String producto="";
+       String rubro="";
+       String composicion="";
+       String presentacion="";
+       String laboratorio="";
+       String unidad="";
+       String almacen="";
+       double stock=0;
+       double prevta=0;
+       double precpra=0;
+       double ganancia=0;
+       String prioridad="";
+       String ubicación="";
+       
+
+       
+       Row rowt = sheet.createRow(4);
+       
+       Cell celdatos2col0= rowt.createCell(0);
+       Cell celdatos2col1= rowt.createCell(1);
+       Cell celdatos2col2= rowt.createCell(2);
+       Cell celdatos2col3= rowt.createCell(3);
+       Cell celdatos2col4= rowt.createCell(4);
+       Cell celdatos2col5= rowt.createCell(5);
+       Cell celdatos2col6= rowt.createCell(6);
+       Cell celdatos2col7= rowt.createCell(7);
+       Cell celdatos2col8= rowt.createCell(8);
+       Cell celdatos2col9= rowt.createCell(9);
+       Cell celdatos2col10= rowt.createCell(10);
+       Cell celdatos2col11= rowt.createCell(11);
+       Cell celdatos2col12= rowt.createCell(12);
+       Cell celdatos2col13= rowt.createCell(13);
+       Cell celdatos2col14= rowt.createCell(14);
+
+       
+       celdatos2col0.setCellStyle(style3);
+       celdatos2col1.setCellStyle(style3);
+       celdatos2col2.setCellStyle(style3);
+       celdatos2col3.setCellStyle(style3);
+       celdatos2col4.setCellStyle(style3);
+       celdatos2col5.setCellStyle(style3);
+       celdatos2col6.setCellStyle(style3);
+       celdatos2col7.setCellStyle(style3);
+       celdatos2col8.setCellStyle(style3);
+       celdatos2col9.setCellStyle(style3);
+       celdatos2col10.setCellStyle(style3);
+       celdatos2col11.setCellStyle(style3);
+       celdatos2col12.setCellStyle(style3);
+       celdatos2col13.setCellStyle(style3);
+       celdatos2col14.setCellStyle(style3);
+
+       
+       celdatos2col0.setCellValue("N°");
+       celdatos2col1.setCellValue("Código");
+       celdatos2col2.setCellValue("Producto");
+       celdatos2col3.setCellValue("Rubro");
+       celdatos2col4.setCellValue("Composición");
+       celdatos2col5.setCellValue("Presentación");
+       celdatos2col6.setCellValue("Laboratorio");
+       celdatos2col7.setCellValue("Unidad");
+       celdatos2col8.setCellValue("Almacen");
+       celdatos2col9.setCellValue("Stock");
+       celdatos2col10.setCellValue("Precio de venta");
+       celdatos2col11.setCellValue("Precio de compra");
+       celdatos2col12.setCellValue("Ganancia");
+       celdatos2col13.setCellValue("Prioridad");
+       celdatos2col14.setCellValue("Ubicación");
+       
+        try {
+            while (result.next()) {
+               
+                idProd=result.getString(1);
+                codigo=result.getString(2);
+                producto=result.getString(3);
+                rubro=result.getString(4);
+                composicion=result.getString(5);
+                presentacion=result.getString(6);
+                laboratorio=result.getString(7);
+                unidad=result.getString(8);
+                almacen=result.getString(9);
+                stock=result.getDouble(10);
+                prevta=result.getDouble(11);
+                precpra=result.getDouble(12);
+                ganancia=result.getDouble(13);
+                prioridad=result.getString(14);
+                ubicación=result.getString(15);
+                
+               Row rown = sheet.createRow(cont+4);
+               
+               Cell celdatosncol0= rown.createCell(0);
+               Cell celdatosncol1= rown.createCell(1);
+               Cell celdatosncol2= rown.createCell(2);
+               Cell celdatosncol3= rown.createCell(3);
+               Cell celdatosncol4= rown.createCell(4);
+               Cell celdatosncol5= rown.createCell(5);
+               Cell celdatosncol6= rown.createCell(6);
+               Cell celdatosncol7= rown.createCell(7);
+               Cell celdatosncol8= rown.createCell(8);
+               Cell celdatosncol9= rown.createCell(9);
+               Cell celdatosncol10= rown.createCell(10);
+               Cell celdatosncol11= rown.createCell(11);
+               Cell celdatosncol12= rown.createCell(12);
+               Cell celdatosncol13= rown.createCell(13);
+               Cell celdatosncol14= rown.createCell(14);
+               
+               
+               celdatosncol0.setCellStyle(style3);
+               celdatosncol1.setCellStyle(style3);
+               celdatosncol2.setCellStyle(style3);
+               celdatosncol3.setCellStyle(style3);
+               celdatosncol4.setCellStyle(style3);
+               celdatosncol5.setCellStyle(style3);
+               celdatosncol6.setCellStyle(style3);
+               celdatosncol7.setCellStyle(style3);
+               celdatosncol8.setCellStyle(style3);
+               celdatosncol9.setCellStyle(style3);
+               celdatosncol10.setCellStyle(style3);
+               celdatosncol11.setCellStyle(style3);
+               celdatosncol12.setCellStyle(style3);
+               celdatosncol13.setCellStyle(style3);
+               celdatosncol14.setCellStyle(style3);
+       
+               celdatosncol0.setCellValue(cont);
+               celdatosncol1.setCellValue(codigo);
+               celdatosncol2.setCellValue(producto);
+               celdatosncol3.setCellValue(rubro);
+               celdatosncol4.setCellValue(composicion);
+               celdatosncol5.setCellValue(presentacion);
+               celdatosncol6.setCellValue(laboratorio);
+               celdatosncol7.setCellValue(unidad);
+               celdatosncol8.setCellValue(almacen);
+               celdatosncol9.setCellValue(stock);
+               celdatosncol10.setCellValue(prevta);
+               celdatosncol11.setCellValue(precpra);
+               celdatosncol12.setCellValue(ganancia);
+               celdatosncol13.setCellValue(prioridad);
+               celdatosncol14.setCellValue(ubicación);
+
+               
+               
+               
+               
+               
+               cont++;
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmReporteEntradaStockDetalle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                  
+        sheet.setColumnWidth(0, 2500);
+        sheet.setColumnWidth(1, 12500);
+        sheet.setColumnWidth(2, 6250);
+        sheet.setColumnWidth(3, 6000);
+        sheet.setColumnWidth(4, 6000);
+        sheet.setColumnWidth(5, 6000);
+        sheet.setColumnWidth(6, 6000);
+        sheet.setColumnWidth(7, 6000);
+        sheet.setColumnWidth(8, 6000);
+        sheet.setColumnWidth(9, 6000);
+        sheet.setColumnWidth(10, 6000);
+        sheet.setColumnWidth(11, 6000);
+        sheet.setColumnWidth(12, 6000);
+        sheet.setColumnWidth(13, 6000);
+        sheet.setColumnWidth(14, 6000);
+        
+       try {
+           
+           
+           FileOutputStream fileout=new FileOutputStream(System.getProperty("user.home")+"/Desktop/ReporteInventario.xlsx");
+           book.write(fileout);
+           fileout.close();
+           
+           JOptionPane.showMessageDialog(null, "Reporte creado y descargado en el escritorio con éxito, nombre: ReporteInventario.xlsx");
+       } catch (FileNotFoundException ex) {
+           Logger.getLogger(FrmTopProductosVendidos.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (IOException ex) {
+           Logger.getLogger(FrmTopProductosVendidos.class.getName()).log(Level.SEVERE, null, ex);
+       }
+        
+    }
+
+    private void imprimir() {
+        Map map = new HashMap();
+        map.put("almacen", cboAlmacen.getSelectedItem().toString());
+        map.put("unidad", "Unidad");
+
+        InventarioDataSource dataSource = new InventarioDataSource();
+        for (int i = 0; i < model.getRowCount(); i++) {
+                                                                                         //"N°","Codigo", "Nombre","Rubro","Composición","Presentación","Laboratorio", "Und", "Almacén","Stock", "Prec. Venta", "Prec. de Compra", "Ganancia",                  "Prioridad","Ubicacion
+            dataSource.addInventario(new jym.ferreteria.datasource.Inventario(tablaInventario.getValueAt(i, 1).toString(), tablaInventario.getValueAt(i, 2).toString(),tablaInventario.getValueAt(i, 3).toString(), tablaInventario.getValueAt(i, 4).toString(),tablaInventario.getValueAt(i, 5).toString(), tablaInventario.getValueAt(i, 6).toString(), tablaInventario.getValueAt(i, 8).toString(), tablaInventario.getValueAt(i, 9).toString(), tablaInventario.getValueAt(i, 10).toString(), tablaInventario.getValueAt(i, 11).toString()));
+        }
+        control.showReportDialog("Inventario de productos", "inventario", map, dataSource);
+    }
+    
+    
+     private void imprimirKardex() {
+         
+         Map map = new HashMap();
+         
+         if (txtFechaDesde.getDate() == null) {
+       control.showReportDialog("Kardex General de Productos", "kardex", null);
+         }
+         
+         else {//Con intervalo de fechas
+             String fec1= control.Formato_Amd(txtFechaDesde.getDate());
+             String fecP1=control.Formato_Amd2(txtFechaDesde.getDate());
+
+             map.put("fec1", fec1);
+             map.put("fecP1", fecP1);
+
+             
+             control.showReportDialog("Kardex General de Productos", "kardexFecha", map);
+         }
+    }
+     
+     private void imprimirKardexProd(){
+     if (tablaInventario.getSelectedRow() >= 0) {
+         Map map = new HashMap();
+         map.put("codProd", model.getValueAt(tablaInventario.getSelectedRow(), 1).toString());
+         
+         
+         if (txtFechaDesde.getDate() == null) {//fecha vacía
+             control.showReportDialog("Kardex de Productos", "kardexProducto", map);
+             
+             System.out.println("Sin fecha");
+         }
+         
+         else {//Con intervalo de fechas
+             String fec1= control.Formato_Amd(txtFechaDesde.getDate());
+
+             
+             String fecP1=control.Formato_Amd2(txtFechaDesde.getDate());
+
+             map.put("fec1", fec1);
+             
+             map.put("fecP1", fecP1);
+
+             System.out.println("Con fecha");
+             control.showReportDialog("Kardex de Productos", "kardexProductoFecha", map);
+         }
+         
+     
+     }else{
+         JOptionPane.showMessageDialog(null, "Seleccione un Producto Para Imprimir Su kardex");
+     }
+     }
+}

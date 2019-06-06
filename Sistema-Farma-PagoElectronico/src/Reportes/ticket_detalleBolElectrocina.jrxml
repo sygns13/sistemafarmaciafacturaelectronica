@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ticket_detalle" language="groovy" pageWidth="192" pageHeight="802" columnWidth="192" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="dc9aab7c-7a04-4fed-8733-bcdbef6f1963">
+	<property name="ireport.zoom" value="3.6363636363636385"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idVenta" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cabeId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT *,replace(format((d.item_to_subtotal+item_to_igv),2),',','') as total  FROM detalle d where docu_codigo=$P{cabeId} order by item_orden;]]>
+	</queryString>
+	<field name="iddetalle" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Codigo autogenerado de la tabla]]></fieldDescription>
+	</field>
+	<field name="docu_codigo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Codigo relacion de la tabla cabecera]]></fieldDescription>
+	</field>
+	<field name="item_orden" class="java.lang.String">
+		<fieldDescription><![CDATA[Numero de Orden]]></fieldDescription>
+	</field>
+	<field name="item_unidad" class="java.lang.String">
+		<fieldDescription><![CDATA[Unidad de Medida del Item
+defecto NIU]]></fieldDescription>
+	</field>
+	<field name="item_cantidad" class="java.lang.String">
+		<fieldDescription><![CDATA[Cantidad de Item]]></fieldDescription>
+	</field>
+	<field name="item_codproducto" class="java.lang.String">
+		<fieldDescription><![CDATA[Codigo del Producto]]></fieldDescription>
+	</field>
+	<field name="item_descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[Descripcion del Producto ]]></fieldDescription>
+	</field>
+	<field name="item_afectacion" class="java.lang.String">
+		<fieldDescription><![CDATA[Tipo de afectacion
+
+10 Gravado - Operación Onerosa (uso comun)
+
+verificar CATALOGO No. 07]]></fieldDescription>
+	</field>
+	<field name="item_tipo_precio_venta" class="java.lang.String">
+		<fieldDescription><![CDATA[Código de tipo de precio - Catálogo No. 16]]></fieldDescription>
+	</field>
+	<field name="item_pventa" class="java.lang.String">
+		<fieldDescription><![CDATA[Precio de venta unitario sin IGV]]></fieldDescription>
+	</field>
+	<field name="item_pventa_no_onerosa" class="java.lang.String">
+		<fieldDescription><![CDATA[Valor referencial unitario por ítem en operaciones no onerosas ( gratuito)]]></fieldDescription>
+	</field>
+	<field name="item_to_subtotal" class="java.lang.String">
+		<fieldDescription><![CDATA[Importe sub total]]></fieldDescription>
+	</field>
+	<field name="item_to_igv" class="java.lang.String">
+		<fieldDescription><![CDATA[Importe del IGV]]></fieldDescription>
+	</field>
+	<field name="item_preunitfin" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="12" splitType="Stretch">
+			<staticText>
+				<reportElement x="25" y="1" width="92" height="11" uuid="ed737dfe-8c3b-48f3-bfa3-2814c06d94d0"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[PRODUCTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="25" height="11" uuid="52ee9130-ac67-4691-9ec3-b8d603a4932d"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CANT.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="1" width="15" height="11" uuid="ace9a4d6-24b5-43b4-a93e-a76909beeb41"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[P.U]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="11" width="190" height="1" uuid="74aa57cb-85cd-4ebf-ae74-5e6afde0c1a8"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="168" y="0" width="24" height="11" uuid="f340b57e-e8ee-4360-a216-b1aa35296a11"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="192" height="1" uuid="773db1e4-4b95-49ac-bee5-9a60039ab280"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="25" y="0" width="92" height="11" uuid="4061b510-4163-424f-adf7-6ddf6abffc72"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{item_descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="21" height="11" uuid="eea33f1c-e7e9-4f31-9bcc-24aa419dddf6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{item_cantidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="117" y="0" width="35" height="11" uuid="2fe86caf-3063-402f-ab6a-87821eefa812"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{item_preunitfin}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="152" y="0" width="39" height="11" uuid="4fa96d82-dd79-428c-9838-ede0a2f6961e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

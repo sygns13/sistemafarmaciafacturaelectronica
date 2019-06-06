@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="483" leftMargin="56" rightMargin="56" topMargin="20" bottomMargin="20" uuid="dc025709-06d6-40a0-89b3-ebfe7ee59811">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\NetBeansProjects\\VentasAgronel\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["D:\\NetBeansProjects\\VentasAgronel\\src\\jym\\agronel\\imagenes\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT r.`idRegularizacionStock`, r.`numero`, r.`fecha`, t.`nombre` as 'TIPO',(select nombre from almacen where idalmacen=idalmacenentrada)as 'Almacen Entrada',(select nombre from almacen where idAlmacen=idalmacenSalida) as 'Almacen Salida', r.motivo FROM regularizacionstock r, tiporegularizacionstock t WHERE t.`idTipoRegularizacionStock`=r.`idTipoRegularizacionStock` AND r.`idRegularizacionStock`=$P{ID} order by r.numero]]>
+	</queryString>
+	<field name="idRegularizacionStock" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numero" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TIPO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Almacen Entrada" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Almacen Salida" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="motivo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="113" y="31" width="370" height="33" uuid="5575719c-a6bc-4118-8547-af3012de80d6"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE REGULARIZACION DE STOCK]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="113" height="79" uuid="9ee2ee38-a7eb-4d6a-89af-39dfab15bb9a"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="87" splitType="Stretch">
+			<textField>
+				<reportElement x="44" y="24" width="70" height="20" uuid="1b22de4a-1fe3-4334-9e66-28d91932a8ab"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="44" y="44" width="74" height="20" uuid="57f6eb75-77e9-4388-a9ac-2f4cc4abed95"/>
+				<textFieldExpression><![CDATA[$F{TIPO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="344" y="6" width="125" height="20" uuid="1f5ed6c0-f9f8-426d-98be-c678fe5221c0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Almacen Entrada}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="344" y="26" width="125" height="20" uuid="d73c3b42-38fa-4b28-a04a-6591e00eb256"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Almacen Salida}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="44" y="64" width="440" height="20" uuid="aaf2f28c-9c82-4983-8571-74e088976996"/>
+				<textFieldExpression><![CDATA[$F{motivo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="4" width="43" height="20" uuid="17682462-57ba-4f92-9752-14b199d01407"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[N°:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="24" width="43" height="20" uuid="f9fe235d-790a-4118-a46b-5c1b1ff8b474"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="44" y="4" width="70" height="20" uuid="04a33d1c-5edd-425c-801d-2615bc18d1a1"/>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="44" width="43" height="20" uuid="08e52398-f23a-479c-aec9-7aef52fe2256"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="238" y="6" width="107" height="20" uuid="8fd86ad2-d121-4dfb-9fb3-f7eefcf39f49"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Almacén de Entrada: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="238" y="26" width="107" height="20" uuid="6f705252-50f2-4af5-810a-fae6ae98a096"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Almacén de Salida:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="64" width="43" height="20" uuid="dd68bd08-b0b2-46fc-a7ac-ecfe78e643d1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Motivo:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="205" y="4" width="1" height="60" uuid="fafc0370-1895-485f-8553-1c69b5cf0df3"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="100">
+			<subreport>
+				<reportElement x="0" y="0" width="483" height="100" uuid="6dda792c-f13a-427d-9efc-270e93462058"/>
+				<subreportParameter name="ID">
+					<subreportParameterExpression><![CDATA[$P{ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ReporteRegularizacionStock_subreporte.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="34" width="100" height="20" uuid="9f0bf3f1-e55e-4fb0-8225-58053c916307"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="34" width="80" height="20" uuid="df878f69-e618-4794-a7aa-12724007813b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="443" y="34" width="40" height="20" uuid="05f20486-10ae-4ab3-a809-156f422a6674"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

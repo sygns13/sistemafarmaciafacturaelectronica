@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteEntradasStock" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="679a8db9-6f22-44fb-8cdf-c4961a384872">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="10"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\NetBeansProjects\\VentasAgronel\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechas" class="java.lang.String"/>
+	<parameter name="movimiento" class="java.lang.String"/>
+	<field name="numeroMovimiento" class="java.lang.String"/>
+	<field name="feha" class="java.lang.String"/>
+	<field name="movimiento" class="java.lang.String"/>
+	<field name="almacenEntrada" class="java.lang.String"/>
+	<field name="almacenSalida" class="java.lang.String"/>
+	<field name="motivo" class="java.lang.String"/>
+	<field name="detalle" class="java.util.List"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="19" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="553" height="20" uuid="5237459b-72a8-4c72-be26-1acc5a20f6e3"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MOVIMIENTOS DE STOCK]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="231" y="20" width="322" height="16" uuid="04490890-e3f3-498e-89eb-643738eefb9a"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechas}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="20" width="175" height="16" uuid="33c918f9-b11b-42c1-bb1c-ef76112a55ee"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{movimiento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="7" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="54" splitType="Stretch">
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="15" width="555" height="15" uuid="dbefac42-e134-4e78-9448-b740bc24a30e"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="2" y="15" width="75" height="15" uuid="a3e94d14-e43d-4231-b5a8-d24a73d4c3d2"/>
+				<textFieldExpression><![CDATA[$F{numeroMovimiento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="78" y="15" width="58" height="15" uuid="844ab6f4-e95b-4d7d-b755-7250266fb018"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{feha}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="138" y="15" width="79" height="15" uuid="48f0f4ad-24a0-46f1-811f-6d960f4d091b"/>
+				<textFieldExpression><![CDATA[$F{movimiento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="219" y="15" width="93" height="15" uuid="668995f0-449b-48f2-af61-d514373f4976"/>
+				<textFieldExpression><![CDATA[$F{almacenEntrada}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="314" y="15" width="97" height="15" uuid="fbddc52c-1aa7-4959-8e22-08cbac0fbbbf"/>
+				<textFieldExpression><![CDATA[$F{almacenSalida}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="414" y="15" width="141" height="15" uuid="3ebf9f2a-9caa-45d7-86eb-1b82863542d7"/>
+				<textFieldExpression><![CDATA[$F{motivo}]]></textFieldExpression>
+			</textField>
+			<subreport isUsingCache="true">
+				<reportElement x="76" y="36" width="479" height="13" uuid="73cf0a4a-c005-48e3-9eec-609485abab8f"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRMapCollectionDataSource($F{detalle})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "reporteGeneralRegularizacionStock_subreport.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement positionType="Float" x="76" y="15" width="1" height="15" uuid="aefd9c61-9fdd-4d7a-8c16-1f11e24ba4b3"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="135" y="15" width="1" height="15" uuid="78d3b984-e607-4d3f-a20d-3bbe7fb25786"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="216" y="15" width="1" height="15" uuid="018519e1-7ee3-4406-b30b-6f43211a42fc"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="311" y="15" width="1" height="15" uuid="f0eb01cb-1223-448b-96b1-204af50dbd49"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="411" y="15" width="1" height="15" uuid="b8ec3183-0439-490e-bb84-51b6c86580b7"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="15" backcolor="#CCCCFF" uuid="98c6de4d-c859-4bdb-a092-78c35db3d535"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="76" y="0" width="1" height="15" uuid="64c3b01e-5599-47a3-be5b-e77cbe0095de"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="135" y="0" width="1" height="15" uuid="9f7a612b-3d7d-4da1-9462-8e8e53a1508f"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="216" y="0" width="1" height="15" uuid="db464682-289f-4e81-8850-37f667fb553b"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="311" y="0" width="1" height="15" uuid="e2d3f8af-6025-47b5-8413-868c2b988fc3"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="411" y="0" width="1" height="15" uuid="26ec28c4-f11b-4967-ae26-59832eb04c58"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="77" height="15" uuid="f00c11a0-cb34-486b-8152-9e5db5b6ba97"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° movimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="77" y="0" width="58" height="15" uuid="4f9b848d-cfbc-4e5f-a8e5-ddab7d9d08ee"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="136" y="0" width="81" height="15" uuid="3f699da7-3edd-4d03-b9a2-f81dd6e6a214"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Movimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="0" width="95" height="15" uuid="1875eb05-48de-468e-a6b9-83b2cc038bb9"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Almacén Entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="312" y="0" width="100" height="15" uuid="2c541cd5-2059-4898-acdf-e3040ace4436"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Almacén Salida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="0" width="144" height="15" uuid="23128b3e-435d-4cb4-9654-13804387ead7"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Motivo]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="433" y="0" width="80" height="20" uuid="3cac0916-4a22-491f-a49e-a6a92854af75"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="513" y="0" width="40" height="20" uuid="a10f85bd-f648-4845-b591-29e59765dd23"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="2" y="0" width="148" height="20" uuid="53bbef31-0332-40d7-9853-9bbf88c974b3"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

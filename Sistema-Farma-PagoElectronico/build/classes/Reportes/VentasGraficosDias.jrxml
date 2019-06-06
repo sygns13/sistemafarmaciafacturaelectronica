@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Analisis Ventas Diarias" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="786" leftMargin="28" rightMargin="28" topMargin="20" bottomMargin="20" uuid="375848c3-a75e-4c79-a4e3-1e7fff35dc1b">
+	<property name="ireport.zoom" value="1.1269722013523664"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaIni" class="java.lang.String"/>
+	<parameter name="numDatos" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select date_format(a.`fecha`,'%d/%m/%Y') as fecha,
+ifnull((select replace(format(sum(dv.cantidad*(dv.precioVenta-((dv.precioVenta*descuento)/100))),'2'),',','')
+from venta v
+inner join detalleventa dv on v.idventa=dv.idventa
+where v.fecha=a.fecha),0.00) as suma,
+ifnull((select replace(format(sum(dv.cantidad*(dv.precioVenta-((dv.precioVenta*descuento)/100))),'2'),',','')
+from venta v
+inner join detalleventa dv on v.idventa=dv.idventa
+where v.fecha=a.fecha),0.00) as suma2
+from auxfecha a
+where a.fecha>='2018/02/01'
+limit 10;]]>
+	</queryString>
+	<field name="fecha" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="suma" class="java.math.BigDecimal"/>
+	<field name="suma2" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="115" splitType="Stretch">
+			<rectangle radius="3">
+				<reportElement x="274" y="86" width="279" height="25" backcolor="#666666" uuid="152a5a5a-7073-4a80-8073-62d5f8a82183"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="353" y="49" width="153" height="15" uuid="eba5b487-ebe8-4c18-9fda-6013aaa47c3b"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[artículos de tocador, perfumes,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="91" width="250" height="15" forecolor="#FFFFFF" uuid="461835a6-2f09-41c4-b6cd-6859011dba11"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jr. Comercio N° 185 Barrio San Martín]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="63" width="76" height="15" uuid="5099e8c9-88cd-4dc0-ad06-1860df29f6a9"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[regalos y otros.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="287" y="14" width="277" height="23" uuid="639ed725-cb90-49c0-8a42-fd3dbe46843a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Botica "Virgen del Carmen"]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="36" width="282" height="15" uuid="78fe8873-ea1d-403e-ad46-2ce21a1253b9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Venta de medicamentos comerciales,]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="336" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement x="40" y="15" width="720" height="303" uuid="dd2ef375-f1ab-430e-bef0-6683c81d032b"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset incrementType="Report"/>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{fecha}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{suma}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{suma}]]></valueExpression>
+						<labelExpression><![CDATA[$F{suma2}]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="60" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

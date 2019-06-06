@@ -1,0 +1,164 @@
+<project>
+    <shortName>SistemaVentasAgronel</shortName>
+    <fullName>Sistema de Ventas Agronel</fullName>
+    <version>1.0</version>
+    <htmlLicenseFile>D:/NetBeansProjects/VentasAgronel/para instalacion/license.html</htmlLicenseFile>
+    <leftImage>D:/NetBeansProjects/VentasAgronel/para instalacion/logoReporte.png</leftImage>
+    <logoImage>D:/NetBeansProjects/VentasAgronel/para instalacion/logoReporte.png</logoImage>
+    <splashImage>D:/NetBeansProjects/VentasAgronel/para instalacion/logoReporte.png</splashImage>
+    <defaultLanguage>es</defaultLanguage>
+    <allowLanguageSelection>1</allowLanguageSelection>
+    <componentList>
+        <component>
+            <name>default</name>
+            <description>Default Component</description>
+            <canBeEdited>1</canBeEdited>
+            <selected>1</selected>
+            <show>1</show>
+            <desktopShortcutList>
+                <shortcut>
+                    <comment>Sistema de Ventas Agronel SISCOMAB</comment>
+                    <exec></exec>
+                    <icon></icon>
+                    <name>Sistema de Ventas Agronel</name>
+                    <noPinToStart>0</noPinToStart>
+                    <path></path>
+                    <platforms>all</platforms>
+                    <runAsAdmin>0</runAsAdmin>
+                    <runInTerminal>0</runInTerminal>
+                    <windowsExec>${installdir}/launch.exe</windowsExec>
+                    <windowsExecArgs></windowsExecArgs>
+                    <windowsIcon>${installdir}/icon.ico</windowsIcon>
+                    <windowsPath>${installdir}/</windowsPath>
+                </shortcut>
+            </desktopShortcutList>
+            <folderList>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfiles</name>
+                    <platforms>all</platforms>
+                    <distributionFileList>
+                        <distributionDirectory>
+                            <origin>D:/NetBeansProjects/VentasAgronel/dist/lib</origin>
+                        </distributionDirectory>
+                        <distributionFile>
+                            <origin>D:/NetBeansProjects/VentasAgronel/para instalacion/icon.ico</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>D:/NetBeansProjects/VentasAgronel/configuration.properties</origin>
+                        </distributionFile>
+                        <distributionDirectory>
+                            <origin>D:/NetBeansProjects/VentasAgronel/para instalacion/src</origin>
+                        </distributionDirectory>
+                        <distributionFile>
+                            <origin>D:/NetBeansProjects/VentasAgronel/dist/System_AgronelPeru.jar</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>D:/NetBeansProjects/VentasAgronel/para instalacion/launch.exe</origin>
+                        </distributionFile>
+                        <distributionDirectory>
+                            <origin>D:/NetBeansProjects/VentasAgronel/log</origin>
+                        </distributionDirectory>
+                    </distributionFileList>
+                    <shortcutList>
+                        <shortcut>
+                            <comment>Uninstall</comment>
+                            <exec>${installdir}/${uninstallerName}</exec>
+                            <icon></icon>
+                            <name>Uninstall ${product_fullname}</name>
+                            <path>${installdir}</path>
+                            <platforms>all</platforms>
+                            <runAsAdmin>0</runAsAdmin>
+                            <runInTerminal>0</runInTerminal>
+                            <windowsExec>${installdir}/${uninstallerName}.exe</windowsExec>
+                            <windowsExecArgs></windowsExecArgs>
+                            <windowsIcon></windowsIcon>
+                            <windowsPath>${installdir}</windowsPath>
+                        </shortcut>
+                    </shortcutList>
+                </folder>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfileslinux</name>
+                    <platforms>linux</platforms>
+                </folder>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfileswindows</name>
+                    <platforms>windows</platforms>
+                </folder>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfilesosx</name>
+                    <platforms>osx</platforms>
+                </folder>
+            </folderList>
+            <startMenuShortcutList>
+                <startMenuShortcut>
+                    <comment>Uninstall ${product_fullname}</comment>
+                    <name>Uninstall ${product_fullname}</name>
+                    <runAsAdmin>0</runAsAdmin>
+                    <runInTerminal>0</runInTerminal>
+                    <windowsExec>${installdir}/${uninstallerName}.exe</windowsExec>
+                    <windowsExecArgs></windowsExecArgs>
+                    <windowsIcon></windowsIcon>
+                    <windowsIconIndex>2</windowsIconIndex>
+                    <windowsPath>${installdir}/</windowsPath>
+                </startMenuShortcut>
+                <startMenuShortcut>
+                    <comment>Sistema de comecialización de Abarrotes</comment>
+                    <name>SISCOMAB</name>
+                    <runAsAdmin>0</runAsAdmin>
+                    <runInTerminal>0</runInTerminal>
+                    <windowsExec>${installdir}/launch.exe</windowsExec>
+                    <windowsExecArgs></windowsExecArgs>
+                    <windowsIcon>${installdir}/icon.ico</windowsIcon>
+                    <windowsPath>${installdir}/</windowsPath>
+                </startMenuShortcut>
+            </startMenuShortcutList>
+        </component>
+    </componentList>
+    <preBuildActionList>
+        <autodetectJava>
+            <explanation>Detectando java en su computadora</explanation>
+            <progressText>Detectando java en su computadora</progressText>
+            <promptUser>0</promptUser>
+            <onErrorActionList>
+                <showInfo>
+                    <text>En necesario tener instalado Java en su máquina</text>
+                </showInfo>
+            </onErrorActionList>
+        </autodetectJava>
+    </preBuildActionList>
+    <enableRollback>1</enableRollback>
+    <enableTimestamp>1</enableTimestamp>
+    <vendor>J&amp;M</vendor>
+    <finalPageActionList>
+        <runProgram>
+            <customErrorMessage>Ocurrió un error al ejecutar el programa, por favor póngase en contacto con su proveedor</customErrorMessage>
+            <explanation>Desea ejecutar el programa?</explanation>
+            <program>${installdir}/launch.exe</program>
+            <programArguments></programArguments>
+        </runProgram>
+    </finalPageActionList>
+    <parameterList>
+        <directoryParameter>
+            <name>installdir</name>
+            <description>Installer.Parameter.installdir.description</description>
+            <explanation>Installer.Parameter.installdir.explanation</explanation>
+            <value></value>
+            <default>${platform_install_prefix}/${product_shortname}-${product_version}</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>yes</ask>
+            <cliOptionName>prefix</cliOptionName>
+            <mustBeWritable>yes</mustBeWritable>
+            <mustExist>0</mustExist>
+            <width>40</width>
+        </directoryParameter>
+    </parameterList>
+</project>
+

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FacturaPagoProveedor_subreport13" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9314074d-b0b9-4974-8e5e-ff72aecf7be4">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="253"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idFacpro" class="java.lang.String"/>
+	<parameter name="importeFactura" class="java.math.BigDecimal"/>
+	<parameter name="enSoles" class="java.lang.String">
+		<defaultValueExpression><![CDATA["0"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[(SELECT p.`idPagoProveedor`, p.`fechapago`,'Efectivo' AS tipoPago,'' as banco,'' as numeroChequeCuenta, CONCAT(IF(p.`esSoles`=TRUE,'S/ ','$ '),FORMAT(p.`montoPago`,2)) AS montoPago, CONCAT(IF($P{enSoles}=1,'S/ ','$ '),FORMAT(p.`montoReal`,2)) AS montoReal,p.`montoReal` AS montoOperacion FROM pagoproveedor p
+WHERE p.`tipoPago`=0 and p.`idFacturaProveedor`=$P{idFacpro})
+union
+(SELECT p.`idPagoProveedor`, p.`fechapago`,'Cheque' AS tipoPago, b.`nombre` as banco, p.`numeroCheque` AS numeroChequeCuenta,CONCAT(IF(p.`esSoles`=TRUE,'S/ ','$ '),FORMAT(p.`montoPago`,2)) AS montoPago, CONCAT(IF($P{enSoles}=1,'S/ ','$ '),FORMAT(p.`montoReal`,2)) AS montoReal, p.`montoReal` AS montoOperacion FROM pagoproveedor p, banco b
+WHERE p.`idBancoEmisor` = b.`idBanco` AND p.`tipoPago`=1 and p.`idFacturaProveedor`=$P{idFacpro}) union
+(SELECT p.`idPagoProveedor`, p.`fechapago`,'Cuenta Bancaria' AS tipoPago, b2.`nombre` AS banco, c.`numerocunt` AS numeroChequeCuenta,CONCAT(IF(p.`esSoles`=TRUE,'S/ ','$ '),FORMAT(p.`montoPago`,2)) AS montoPago, CONCAT(IF($P{enSoles}=1,'S/ ','$ '),FORMAT(p.`montoReal`,2)) AS montoReal, p.`montoReal` AS montoOperacion FROM pagoproveedor p, banco b2, cuentaproveedor c
+WHERE p.`idBancoEmisor` = b2.`idBanco` AND p.`tipoPago`=2 AND c.`idCuentaProveedor` = p.`idCuentaProveedor` and p.`idFacturaProveedor`=$P{idFacpro}) order by 2;
+        ]]>
+	</queryString>
+	<field name="idPagoProveedor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechapago" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoPago" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="banco" class="java.lang.String"/>
+	<field name="numeroChequeCuenta" class="java.lang.String"/>
+	<field name="montoPago" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montoReal" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montoOperacion" class="java.math.BigDecimal"/>
+	<variable name="importePagado" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{montoOperacion}]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="555" height="15" uuid="a799e85c-6b8e-4c07-8654-3f100e954141"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="58" height="15" uuid="675ca2a0-38e8-445d-9dc6-63f359d205d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="59" y="0" width="70" height="15" uuid="0373f150-12c7-4150-9a8b-aa68fc46ab88"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Modo pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="0" width="162" height="15" uuid="a75ce4a3-7243-49bb-9ef5-b1d6a8334cc6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Banco]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="0" width="127" height="15" uuid="3fc8e893-3966-47d3-be17-15c5c2827e19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Cheque/ N° Cuenta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="491" y="0" width="64" height="15" uuid="653e8581-5462-4006-bd75-2181953e9ab5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto real]]></text>
+			</staticText>
+			<line>
+				<reportElement x="490" y="0" width="1" height="15" uuid="7a59b05b-8971-4fe7-9041-d5642f330a43"/>
+			</line>
+			<line>
+				<reportElement x="292" y="0" width="1" height="15" uuid="647ab0b3-0012-47d9-9f3a-0b5fc9a840e1"/>
+			</line>
+			<line>
+				<reportElement x="129" y="0" width="1" height="15" uuid="e70f5ded-8681-43f8-97fd-f76434f685e4"/>
+			</line>
+			<line>
+				<reportElement x="58" y="0" width="1" height="15" uuid="2c0a6d93-7921-4c81-82cc-579ddedf0097"/>
+			</line>
+			<staticText>
+				<reportElement x="420" y="0" width="69" height="15" uuid="bfa24f12-0168-4e44-b852-6613341e7287"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto pago]]></text>
+			</staticText>
+			<line>
+				<reportElement x="420" y="0" width="1" height="15" uuid="5981b910-b936-48d3-9ce6-c04070d4f2fe"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15">
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="555" height="15" uuid="7766e59e-514b-46f5-b328-b7c0e5a4f4a2"/>
+			</rectangle>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="490" y="0" width="1" height="15" uuid="0d3be39a-8877-44a3-aefc-b6704c9140f5"/>
+			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="58" height="15" uuid="9656800c-9ed5-4bfc-abed-c4444df7b5a8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechapago}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="129" y="0" width="1" height="15" uuid="fe9c5606-2efe-4e4d-8575-4db941b64916"/>
+			</line>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="60" y="0" width="68" height="15" uuid="e3404126-0543-4155-9313-ab1e7ad10b0c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoPago}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="292" y="0" width="1" height="15" uuid="a4f51560-1b5a-4db9-937a-af2e4fe77281"/>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="58" y="0" width="1" height="15" uuid="005a6ad3-1f34-4357-a441-ca5494b22d6e"/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="131" y="0" width="161" height="15" uuid="aff61c0e-7bff-4a7b-bee7-7233f2f64d16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{banco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="295" y="0" width="125" height="15" uuid="cf7a4dbd-3e86-49f3-9c1a-d6a19c9c1df1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroChequeCuenta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="420" y="0" width="69" height="15" uuid="e819615d-b320-4af7-9356-9f6eeb6a4049"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{montoPago}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="420" y="0" width="1" height="15" uuid="e483b988-38b2-41d1-a10d-a92c477c1f04"/>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement x="491" y="0" width="62" height="15" uuid="618061c8-acea-458f-8eb4-35419b8fa433"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{montoReal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="41">
+			<staticText>
+				<reportElement x="390" y="0" width="100" height="20" uuid="573ac36d-4b3d-4377-acc9-0a85d329a4ef"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe pagado:   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="20" width="100" height="20" uuid="cf1ed5c3-1dcf-452d-bdd1-cd8322ef59f6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe pendiente:   ]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="505" y="0" width="47" height="20" uuid="f928ade5-a5e3-4544-bbb6-7c48013ad7b8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{importePagado}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="505" y="20" width="47" height="20" uuid="0f2dbed8-230d-4f99-a037-ab61e8afb24a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{importeFactura}.subtract( $V{importePagado} )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="490" y="0" width="15" height="20" uuid="a89cb596-8187-414e-863f-84ffaebb1aab"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $P{enSoles}.equals("1") ? "S/ " : "$ " )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="490" y="20" width="15" height="20" uuid="80f12929-df0b-4152-90d7-71d82c1a65eb"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $P{enSoles}.equals("1") ? "S/ " : "$ " )]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

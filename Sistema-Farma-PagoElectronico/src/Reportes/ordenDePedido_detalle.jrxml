@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ordenDePedido_detalle" language="groovy" pageWidth="399" pageHeight="802" columnWidth="399" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="79cd173a-30b6-4ec2-a3c8-224dd9b4d4a3">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idVenta" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select d.cantidad as cantidad, concat(d.unidad, ' ',pre.`present`,' ',p.`nomproducto`) as Descripcion,
+format(d.precioVenta,2) as precioUnitario, concat(format(d.descuento,2),' %') as descuento,
+format(((d.cantidad*d.cantreal)*(d.precioventa-(d.precioventa*(d.descuento/100)))),2) as total
+from detalleventa d
+inner join venta v on v.idventa=d.idventa
+inner join produto p on p.idproduto=d.idproducto
+inner join presentacion pre on pre.idpresentacion=p.idpresentacion and d.`idVenta`=$P{idVenta} order by d.iddetalleventa;]]>
+	</queryString>
+	<field name="cantidad" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precioUnitario" class="java.lang.String"/>
+	<field name="descuento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="14" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="0" width="52" height="17" uuid="9efddd70-0e7a-4694-affd-0ba0bd5ef5b7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="0" width="194" height="17" uuid="07321c5d-7261-4632-9eb2-1647797e1167"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="257" y="0" width="41" height="17" uuid="55e0b1dc-d66d-416c-9b86-2edb4aac59fe"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precioUnitario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="298" y="0" width="30" height="17" uuid="148e8ab6-4ee3-45aa-8867-e5a162b7c4ef"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="328" y="0" width="60" height="17" uuid="af5a0095-ab39-45aa-a652-20ea2786eded"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

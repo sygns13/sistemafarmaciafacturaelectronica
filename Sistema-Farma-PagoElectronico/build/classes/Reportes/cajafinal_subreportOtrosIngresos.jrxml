@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cajafinal_subreportOtrosIngresos" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="bfc96c17-2829-4a9d-b07c-bfce5f68d0ed">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idsede" class="java.lang.String"/>
+	<parameter name="f_inicio" class="java.lang.String"/>
+	<parameter name="f_fin" class="java.lang.String"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT idIngresoCaja, REPLACE(FORMAT(monto, 2), ',', '') as monto, concepto, comprobante, fecha, idSede, tipo, tipoComp, hora FROM `ingresocaja` where tipo='Ingreso' and idsede=$P{idsede} and fecha between $P{f_inicio} and $P{f_fin};]]>
+	</queryString>
+	<field name="idIngresoCaja" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="monto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="concepto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="comprobante" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idSede" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoComp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hora" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="total" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{monto}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50">
+			<textField isBlankWhenNull="true">
+				<reportElement x="63" y="30" width="431" height="20" isRemoveLineWhenBlank="true" uuid="abe1f11d-20f3-4b0f-9488-9ab19e60fa02"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<rectangle>
+				<reportElement x="60" y="23" width="434" height="15" uuid="98d785d0-6b0b-40a4-827b-60dead949c1b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="429" y="23" width="63" height="15" uuid="f6a2ba96-aa68-4dba-a7f9-4caf6d468570"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Monto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="23" width="66" height="15" uuid="3e5d071a-8d4e-48ee-8c40-5b49c53d7b3d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[N° Comprobante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="23" width="69" height="15" uuid="078bb8ce-03cb-4099-a918-2f47b0c340a3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="23" width="142" height="15" uuid="84d12aef-8b4a-4194-8d5c-3294b55a54fe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Concepto]]></text>
+			</staticText>
+			<line>
+				<reportElement x="130" y="23" width="1" height="15" uuid="b399b8c2-869e-4053-bb70-29afa6c8dd93"/>
+			</line>
+			<line>
+				<reportElement x="359" y="23" width="1" height="15" uuid="2ccc966d-e4ce-464f-b5e2-f9c21079794c"/>
+			</line>
+			<line>
+				<reportElement x="426" y="23" width="1" height="15" uuid="316bc11e-c901-4d94-b35a-106d4f7aa9ef"/>
+			</line>
+			<staticText>
+				<reportElement x="63" y="3" width="118" height="20" uuid="9f373446-327c-4974-bb7b-77e870e5502d"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Otros Ingresos]]></text>
+			</staticText>
+			<line>
+				<reportElement x="274" y="23" width="1" height="15" uuid="1ede908b-4ba0-463e-9a6b-ffd8e8ea6821"/>
+			</line>
+			<staticText>
+				<reportElement x="275" y="23" width="84" height="15" uuid="74383577-64fe-4b84-b562-a171f495a6a7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Comprobante]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="60" y="0" width="434" height="15" uuid="6d84d10c-9503-422e-b249-d0f8382ab95f"/>
+			</rectangle>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="430" y="0" width="59" height="15" uuid="15cac368-2ddd-49f1-b40b-3d62bae4050c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="132" y="0" width="142" height="15" uuid="faa83adb-c5ba-4327-b54d-e9b3325a0c4e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{concepto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="360" y="0" width="66" height="15" uuid="a0ac8462-2425-455d-8562-d52bd15ce731"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{comprobante}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="60" y="0" width="69" height="15" uuid="53486777-14cf-4daa-8673-a63dc75b8023"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="130" y="0" width="1" height="15" uuid="b8aa1a56-657b-44de-a1dc-61a96e62e47b"/>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="359" y="0" width="1" height="15" uuid="dcfdcb31-3716-469c-bad2-2af05ee9235f"/>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="426" y="0" width="1" height="15" uuid="0bb8a39d-4545-4b4e-94d5-c08c8261aa91"/>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="274" y="0" width="1" height="15" uuid="25ac413a-dcf2-432a-b352-d49fb196f1b1"/>
+			</line>
+			<textField>
+				<reportElement x="275" y="0" width="84" height="15" uuid="8b0438da-c6ba-4fd9-bcc6-7bbf88854828"/>
+				<textFieldExpression><![CDATA[$F{tipoComp}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="40" splitType="Stretch">
+			<line>
+				<reportElement x="61" y="3" width="431" height="1" uuid="069277aa-9510-463f-a613-df3613e867fe"/>
+			</line>
+			<staticText>
+				<reportElement x="396" y="4" width="30" height="20" uuid="7ac9080c-0d27-49e9-b121-cc5b87bbc668"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField pattern="S/ #,##0.00">
+				<reportElement x="423" y="4" width="71" height="20" uuid="00759579-ae9c-4dcb-8f47-c8d5eef317d4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

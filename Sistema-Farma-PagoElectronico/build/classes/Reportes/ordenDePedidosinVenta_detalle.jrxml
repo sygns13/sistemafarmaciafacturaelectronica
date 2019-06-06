@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ordenDePedidosinVenta_detalle" language="groovy" pageWidth="399" pageHeight="802" columnWidth="399" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="10ad8ca7-6978-487d-a911-a925cd15b96e">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idVenta" class="java.lang.String"/>
+	<parameter name="idOrden" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT d.`cantidadProd`, u.`nomuniddes`, concat(t.`nomtip`,' ',m.`nommarc`,' ',p.`nomproducto`) as producto, dv.`precioVenta`,(dv.`precioVenta`*d.`cantidadProd`) AS TOTAL FROM detalleordenpedido d, ordenpedido o, produto p, unidades u, detalleventa dv, tipoproducto t, marca m
+WHERE u.`idUnidades`=p.`idUnidades` AND p.`idProduto`=dv.`idProducto` AND dv.`idDetalleVenta`=d.`idDetalleventa` AND o.`idordenpedido`=d.`idordenpedido` AND m.`idMarca`=p.`idMarca` AND t.`idTipoProducto`=p.`idTipoProducto` AND o.`idordenpedido`=$P{idOrden} AND o.`idVenta`=$P{idVenta};]]>
+	</queryString>
+	<field name="cantidadProd" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomuniddes" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="producto" class="java.lang.String"/>
+	<field name="precioVenta" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TOTAL" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="14" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement x="21" y="0" width="33" height="17" uuid="7672faca-03b8-4350-a1bf-bab6845692ea"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cantidadProd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="0" width="45" height="17" uuid="84e3140b-9444-40df-bc78-7f7937d1aa84"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nomuniddes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="0" width="176" height="17" uuid="f15d5ea6-417d-4399-b325-5e8879ab5d0e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="283" y="0" width="50" height="17" uuid="11cc0b55-d3a0-4c8a-b573-0aeb7c829ff4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{precioVenta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="338" y="0" width="55" height="17" uuid="65fea0ed-e3a6-4776-bf91-d0edffad5460"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

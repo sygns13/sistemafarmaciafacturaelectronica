@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ordenDePedido" language="groovy" pageWidth="595" pageHeight="575" columnWidth="576" leftMargin="19" rightMargin="0" topMargin="22" bottomMargin="28" uuid="a15f6b49-c2e0-40a4-857c-0ca95bf69646">
+	<property name="ireport.zoom" value="1.7715610000000042"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idVenta" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\J&M System - Soft\\Sistema-Ferreteria\\Sistema-Ferreteria\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT v.`idVenta`, c.`dniRuc`, concat(c.`nomcte`,'     -    ',tele) as nomcte, c.`direc`,c.tele, v.`subTotalInafecto`,ROUND(v.`subTotalAfecto`+v.`igv`,2) AS subTotalAfecto,ROUND(v.`subTotalInafecto`+v.`subTotalAfecto`+v.`igv`,2) AS total,
+date_format(v.`fecha`,'%d') AS dia,
+date_format(v.`fecha`,'%m')AS mes,date_format(v.`fecha`,'%y') AS anio FROM venta v, cliente c
+WHERE v.`idCliente`=c.`idCliente` AND v.`idVenta`=$P{idVenta}]]>
+	</queryString>
+	<field name="idVenta" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dniRuc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomcte" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tele" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="subTotalInafecto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="subTotalAfecto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dia" class="java.lang.String"/>
+	<field name="mes" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="anio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="159" splitType="Stretch">
+			<textField>
+				<reportElement x="73" y="104" width="305" height="17" uuid="7e2e9db0-bc56-4818-a6be-144a95cd6201"/>
+				<textFieldExpression><![CDATA[$F{nomcte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="55" y="88" width="34" height="17" uuid="9ffb8813-84e7-499b-96c4-828dc278b209"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{dia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="88" width="34" height="17" uuid="afaaa10a-7e00-4f3e-b12b-c14649316bd6"/>
+				<textFieldExpression><![CDATA[$F{mes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="88" width="34" height="17" uuid="e9bc10ab-6bdb-41f7-96a2-40ddcef30914"/>
+				<textFieldExpression><![CDATA[$F{anio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="122" width="305" height="17" uuid="1371d71f-ddc6-400e-9126-fc9949876541"/>
+				<textFieldExpression><![CDATA[$F{direc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="342" splitType="Stretch">
+			<subreport>
+				<reportElement x="13" y="0" width="383" height="342" uuid="f23c0109-2159-4b4f-9f41-8586bf1b8d1f"/>
+				<subreportParameter name="idVenta">
+					<subreportParameterExpression><![CDATA[$P{idVenta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ordenDePedido_detalle.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="333" y="-2" width="62" height="20" uuid="b4ecaf39-ffea-48b2-8ec0-fbee59623e66"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

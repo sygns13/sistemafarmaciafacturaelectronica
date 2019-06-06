@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ticket_detalle" language="groovy" pageWidth="177" pageHeight="802" columnWidth="177" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="dc9aab7c-7a04-4fed-8733-bcdbef6f1963">
+	<property name="ireport.zoom" value="3.6363636363636385"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idVenta" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT FORMAT(@a:= v.`subTotalInafecto`+v.`subTotalAfecto`+ v.`igv`,2) AS totalito, (@b:=(SELECT IFNULL(SUM(cv.`importe`),0.00) As montoCobrado
+FROM `cobroventa` cv WHERE cv.`idVenta`=v.`idVenta`)) AS montoCobrado, (@a-@b) AS porCobrar,concat(d.Unidad,' ',pre.`present`,' ', p.nomproducto)
+AS Descripcion, d.`cantidad`, format(d.`precioVenta`,2) as precioVenta, d.descuento,
+format(((d.cantidad*d.cantreal)*(d.precioventa-(d.precioventa*(d.descuento/100)))),2) AS total
+FROM vta_catalogo vt, detalleventa d
+inner join produto p on p.idproduto=d.idproducto
+inner join presentacion pre on pre.idpresentacion=p.idpresentacion
+,venta v
+WHERE d.`idProducto`=vt.`ID` AND v.`idVenta`= d.`idVenta` AND d.`idVenta`= $P{idVenta};]]>
+	</queryString>
+	<field name="totalito" class="java.lang.Double"/>
+	<field name="montoCobrado" class="java.lang.Double"/>
+	<field name="porCobrar" class="java.lang.Double"/>
+	<field name="Descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precioVenta" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descuento" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="total" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="12" splitType="Stretch">
+			<staticText>
+				<reportElement x="25" y="1" width="72" height="11" uuid="ed737dfe-8c3b-48f3-bfa3-2814c06d94d0"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRODUCTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="25" height="11" uuid="52ee9130-ac67-4691-9ec3-b8d603a4932d"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CANT.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="97" y="1" width="28" height="11" uuid="ace9a4d6-24b5-43b4-a93e-a76909beeb41"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[P.U]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="11" width="177" height="1" uuid="74aa57cb-85cd-4ebf-ae74-5e6afde0c1a8"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="147" y="0" width="30" height="11" uuid="f340b57e-e8ee-4360-a216-b1aa35296a11"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="177" height="1" uuid="773db1e4-4b95-49ac-bee5-9a60039ab280"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="125" y="1" width="22" height="11" uuid="77d14464-1fd2-40eb-ba29-f3aab5f018c5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dto %]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="25" height="11" uuid="19d96491-6cda-416e-b98b-2639c355c100"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="25" y="0" width="72" height="11" uuid="c0a9dffc-a723-4f28-b18b-a77aa3ad308a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="0" width="22" height="11" uuid="893ed5ef-07c5-4c23-8603-fabbb6ffb96d"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="0" width="30" height="11" uuid="1c7cad85-dcb9-4fdf-a25f-2ee1d1cf1357"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="-1" width="28" height="12" uuid="829ec967-d641-4ec0-93bf-f263dc96e4e6"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precioVenta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="2" width="68" height="11" uuid="27c5e4b3-f632-4a2b-a820-fcc255cbd179"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Venta  :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="1" width="177" height="1" uuid="159eef83-6138-4dfc-9ed6-1bf97230ee97"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField pattern="S/ #,##0.00">
+				<reportElement x="81" y="2" width="96" height="11" uuid="e27bb116-5254-4b0a-b8f0-305e3a098f67"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="13" width="68" height="11" uuid="dde69baa-2788-4535-947f-9f92407700b5"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto Cobrado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="24" width="68" height="11" uuid="fe544bb4-0839-4b6d-9d74-6ced181a78e0"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Por Cobrar   :]]></text>
+			</staticText>
+			<textField pattern="S/ #,##0.00">
+				<reportElement x="81" y="24" width="96" height="11" uuid="3cee0f72-814e-4102-8a49-c3580393bfa2"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{porCobrar}]]></textFieldExpression>
+			</textField>
+			<textField pattern="S/ #,##0.00">
+				<reportElement x="81" y="13" width="96" height="11" uuid="f569588a-bbb6-4d9c-842b-af706f534ab4"/>
+				<textElement>
+					<font fontName="Calibri" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{montoCobrado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

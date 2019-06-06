@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FacturaProveedor" language="groovy" pageWidth="595" pageHeight="842" columnWidth="513" leftMargin="41" rightMargin="41" topMargin="20" bottomMargin="20" uuid="9cacd1d6-4c31-43e2-8f62-eb5fdc4d80c0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idFacturaProveedor" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\NetBeansProjects\\Sistema-Ferreteria\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT concat(f.`serie`,'-', f.`numero`), f.`fecha`, CONCAT('R.U.C. ',p.`RUC`) AS ruc, p.`Nombre`, e.idEntradaStock, UPPER(concat(tc.nombre,' DE PROVEEDOR')) as comprobante
+
+FROM entradastock e, proveedor p, facturaproveedor f inner join tipocomprobante tc on tc.idtipocomprobante=f.idtipocomprobante
+WHERE p.`idProveedor`=f.`idProveedor` AND f.`idFacturaProveedor`=e.`idFacturaProveedor` AND e.`idFacturaProveedor`=$P{idFacturaProveedor};]]>
+	</queryString>
+	<field name="concat(f.`serie`,&apos;-&apos;, f.`numero`)" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ruc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idEntradaStock" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="comprobante" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="Nombre_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{Nombre}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="384" y="22" width="127" height="20" uuid="46251d5f-068c-4fe2-bf89-3bcfb55655ee"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ruc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="384" y="41" width="127" height="20" uuid="652f5770-e549-480d-b7a7-7884a06b3bd8"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{concat(f.`serie`,'-', f.`numero`)}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="4">
+				<reportElement mode="Transparent" x="384" y="13" width="127" height="51" uuid="957b5c01-2155-4c38-90e1-def634de25c6"/>
+			</rectangle>
+			<line>
+				<reportElement x="16" y="70" width="480" height="1" uuid="715fe913-0e2e-4d10-9178-6082b7164995"/>
+			</line>
+			<textField>
+				<reportElement x="16" y="22" width="354" height="20" uuid="a7e680bc-1211-4ce5-9859-a5838d5bec00"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{comprobante}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="30" width="75" height="20" uuid="2d4d2968-6518-4ef7-85f3-a251c63473c3"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="76" y="10" width="435" height="15" uuid="44ef9ae9-8512-45d9-b94d-a68e9b942872"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="76" y="30" width="435" height="20" uuid="daf14304-44f6-47f1-a31b-cf9d4469caaf"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="10" width="75" height="15" uuid="71d68f7b-7e9e-4cfd-be5a-765844d4d0dd"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proveedor:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="47" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="511" height="46" uuid="da8784ec-fbce-4523-9b1e-d9c68ed0def9"/>
+				<subreportParameter name="idEntradaStock">
+					<subreportParameterExpression><![CDATA[$F{idEntradaStock}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "FacturaProveedor_productos.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="1" y="0" width="100" height="20" uuid="7fc5b485-ac76-46d3-be7a-0cb438163b26"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="471" y="0" width="40" height="20" uuid="9e5c1dfc-94ed-46ca-9b33-f6a5a8d04366"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="391" y="0" width="80" height="20" uuid="2073b288-df11-425e-9103-5132f2a88205"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

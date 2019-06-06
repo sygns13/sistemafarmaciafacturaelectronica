@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteGuiaDeRemision_detalle" language="groovy" pageWidth="541" pageHeight="802" columnWidth="541" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a38f4c87-d2a5-4c09-b970-529ecfdfdf9e">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idVenta" class="java.lang.String"/>
+	<parameter name="idGuia" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT u.`nomuniddes`,concat(p.`nomproducto`,' ',p.`descProd`) as nomproducto, dg.`cantidadProd` FROM produto p, unidades u, detalleventa d, detalleguiaremision dg, guiaderemision g
+WHERE u.`idUnidades`=p.`idUnidades` AND p.`idProduto`=d.`idProducto` AND d.`idDetalleVenta`=dg.`iddetalleventa` AND g.`idguiaderemision`=dg.`idguiaderemision` AND g.`idguiaderemision`=$P{idGuia} and g.`idVenta`=$P{idVenta};]]>
+	</queryString>
+	<field name="nomuniddes" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomproducto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidadProd" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="12" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="24" y="0" width="65" height="13" uuid="0d776b67-da83-4c1b-b098-51572368ceff"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{nomuniddes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="102" y="0" width="359" height="13" uuid="4d38cbb7-0eff-4c9e-a94d-cef5d387da7a"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{nomproducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="23" height="13" uuid="3c4e36fc-d382-4b00-b64f-f871965fc4d0"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{cantidadProd}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

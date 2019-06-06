@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="facturaVenta_subreport1" language="groovy" pageWidth="550" pageHeight="226" columnWidth="550" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="82fb4e24-fa29-477d-a971-2b858ac7c8bc">
+	<property name="ireport.zoom" value="1.4641000000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idVenta" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT  d.`cantidad`, concat(v.`Producto`,' ',v.`Descripcion`) as Descripcion, (d.`precioVenta`-d.`descuento`) as precioUnitario, IF(d.`esGrabado`=TRUE,0.00,ROUND(d.`cantidad`* (d.`precioVenta`-d.`descuento`),2)) as inafecto FROM detalleventa d, vta_catalogo v
+WHERE d.`idProducto`=v.`ID` AND d.`idVenta`=$P{idVenta};]]>
+	</queryString>
+	<field name="cantidad" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Descripcion" class="java.lang.String"/>
+	<field name="precioUnitario" class="java.math.BigDecimal"/>
+	<field name="inafecto" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="17" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="0" width="42" height="15" uuid="4fc6cd87-d3cc-441d-8ebf-376a8a4392dc"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="85" y="0" width="300" height="15" uuid="58b8a4c6-c30a-4c15-9007-0f29df6aae5b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="430" y="0" width="40" height="15" uuid="bf1c4be0-3ed1-4873-94c4-38c7b8fb75a8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precioUnitario}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="481" y="0" width="51" height="15" uuid="b489730f-c2d7-4cc1-895e-f4fcdd0db9af"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inafecto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

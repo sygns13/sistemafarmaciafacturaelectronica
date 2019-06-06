@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FacturaPagoProveedor" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="29838726-7581-4c7a-a953-ab9c048e7532">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idFacpro" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\NetBeansProjects\\VentasAgronel\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["D:\\NetBeansProjects\\VentasAgronel\\src\\jym\\agronel\\imagenes\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT concat(f.`serie`,' - ', f.`numero`) as numerofactura,
+p.`RUC`, p.`Nombre`,f.`total` as Monto, enSoles
+FROM facturaproveedor f LEFT JOIN entradastock e ON  f.`idFacturaProveedor`=e.`idFacturaProveedor` , proveedor p
+WHERE p.`idProveedor`=f.`idProveedor`  and f.idFacturaProveedor=$P{idFacpro};]]>
+	</queryString>
+	<field name="numerofactura" class="java.lang.String"/>
+	<field name="RUC" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Monto" class="java.math.BigDecimal"/>
+	<field name="enSoles" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="56" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="18" width="555" height="23" uuid="e7ab787d-511e-4c02-b369-6e1cca62ea20"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Cuentas por pagar a proveedor]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="84" height="56" uuid="1d85c07a-a9b2-4473-90b2-1ae7d6cddacf"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="395" y="7" width="37" height="20" uuid="37b1d336-11c1-41d5-ada3-5c1e8aa7e498"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUC:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="7" width="61" height="20" uuid="e0575c2c-9c22-412d-9395-d263b6e64ebd"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proveedor:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="435" y="7" width="104" height="20" uuid="97f6cbd9-fe45-4a69-95d8-a8b6f02fbdb1"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{RUC}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="395" y="27" width="37" height="20" uuid="871cfe58-499f-4c97-b402-2cbfca4d9f3d"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="61" y="27" width="317" height="20" uuid="15610faa-3e2c-4eb4-a32a-0ab5f21a6b89"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{numerofactura}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="27" width="61" height="20" uuid="cbc528ef-cc4d-4787-a7e1-3794ee200e05"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Factura:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="61" y="7" width="317" height="20" uuid="46fff44b-424c-434b-afdb-fafaf1c64f89"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="450" y="27" width="104" height="20" uuid="289dc5d7-677a-48b5-a167-1cfd6808c79e"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Monto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="435" y="27" width="15" height="20" uuid="1471ccea-9333-45a6-8ac6-41a0f541839d"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{enSoles}.booleanValue() ? "S/ " : "$ " )]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="37" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="34" uuid="19c041de-3f02-46b0-bb1f-3c83d2a0f393"/>
+				<subreportParameter name="enSoles">
+					<subreportParameterExpression><![CDATA[( $F{enSoles}.booleanValue() ? "1" : "0" )]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="importeFactura">
+					<subreportParameterExpression><![CDATA[$F{Monto}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idFacpro">
+					<subreportParameterExpression><![CDATA[$P{idFacpro}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "FacturaPagoProveedor_subreport13.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="435" y="3" width="80" height="20" uuid="dccce04f-04ee-40f9-8b97-a4b43788e1e5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="3" width="40" height="20" uuid="2eef524d-6e31-436d-97e8-a8ed0190e1fd"/>
+				<textElement verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="3" width="100" height="20" uuid="8677c734-4976-4332-a33c-3627fa6d90ed"/>
+				<textElement verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ticket" pageWidth="212" pageHeight="842" columnWidth="192" leftMargin="10" rightMargin="10" topMargin="20" bottomMargin="10" isTitleNewPage="true" isIgnorePagination="true" uuid="8f9a47f8-d06c-49c8-a4a4-8e3554bdc565">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1066"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Proyectos Java\\Sistema-Farmacia\\Sistema-Farma-PagoElectronico\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idVenta" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="montoLetra" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT *,if(clie_tipodoc='1','DNI:',if(clie_tipodoc='4','N° DE CARNET DE EXTRANJERÍA:',if(clie_tipodoc='6','RUC:',if(clie_tipodoc='7','N° PASAPORTE:',if(clie_tipodoc='A','CED. DIPLOMÁTICA DE IDENTIDAD:',''))))) as tipodoccli FROM cabecera c where idventa=$P{idVenta};]]>
+	</queryString>
+	<field name="docu_codigo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Codigo de tabla Autogenerado]]></fieldDescription>
+	</field>
+	<field name="idExterno" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empr_razonsocial" class="java.lang.String">
+		<fieldDescription><![CDATA[Razon social de la empresa]]></fieldDescription>
+	</field>
+	<field name="empr_ubigeo" class="java.lang.String">
+		<fieldDescription><![CDATA[Codigo de Ubigeo de la empresa]]></fieldDescription>
+	</field>
+	<field name="empr_nombrecomercial" class="java.lang.String">
+		<fieldDescription><![CDATA[Nombre Comercial de la empresa]]></fieldDescription>
+	</field>
+	<field name="empr_direccion" class="java.lang.String">
+		<fieldDescription><![CDATA[Direccion de la Empresa]]></fieldDescription>
+	</field>
+	<field name="empr_provincia" class="java.lang.String">
+		<fieldDescription><![CDATA[Provincia de la empresa]]></fieldDescription>
+	</field>
+	<field name="empr_departamento" class="java.lang.String">
+		<fieldDescription><![CDATA[Departamento de la empresa]]></fieldDescription>
+	</field>
+	<field name="empr_distrito" class="java.lang.String">
+		<fieldDescription><![CDATA[Distrito de la empresa]]></fieldDescription>
+	</field>
+	<field name="empr_pais" class="java.lang.String">
+		<fieldDescription><![CDATA[Pais de la empresa - PE]]></fieldDescription>
+	</field>
+	<field name="empr_nroruc" class="java.lang.String">
+		<fieldDescription><![CDATA[Numero de Ruc de la empresa]]></fieldDescription>
+	</field>
+	<field name="empr_tipodoc" class="java.lang.String">
+		<fieldDescription><![CDATA[Tiop de documento de la empresa - 6 - RUC]]></fieldDescription>
+	</field>
+	<field name="clie_numero" class="java.lang.String">
+		<fieldDescription><![CDATA[Documento del cliente]]></fieldDescription>
+	</field>
+	<field name="clie_tipodoc" class="java.lang.String">
+		<fieldDescription><![CDATA[Tipo de documento del cliente  - 6  - RUC]]></fieldDescription>
+	</field>
+	<field name="clie_nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[Nombre / Razon Social del cliente]]></fieldDescription>
+	</field>
+	<field name="docu_fecha" class="java.util.Date">
+		<fieldDescription><![CDATA[fecha del documento formato YYYY-MM-DD]]></fieldDescription>
+	</field>
+	<field name="docu_tipodocumento" class="java.lang.String">
+		<fieldDescription><![CDATA[Tipo de Documento
+01 - Factura
+03 - Boleta de Venta
+07 - Nota de Credito
+08 - Nota de Debito
+20 - Retenciones]]></fieldDescription>
+	</field>
+	<field name="docu_numero" class="java.lang.String">
+		<fieldDescription><![CDATA[Numero de Documento
+format
+serie - numero
+serie:
+F000 factura
+B000 Boleta
+R000 Retenciones
+-------------
+Nota de credito  y Nota de Debito
+si e a una factura
+F000
+si es a una Boleta
+B000]]></fieldDescription>
+	</field>
+	<field name="docu_moneda" class="java.lang.String">
+		<fieldDescription><![CDATA[Moneda del documento
+PEN - Soles
+USD - Dollar]]></fieldDescription>
+	</field>
+	<field name="docu_gravada" class="java.lang.String">
+		<fieldDescription><![CDATA[Importe total de Documento grabado al IGV]]></fieldDescription>
+	</field>
+	<field name="docu_inafecta" class="java.lang.String">
+		<fieldDescription><![CDATA[importe inafecto del documento]]></fieldDescription>
+	</field>
+	<field name="docu_exonerada" class="java.lang.String">
+		<fieldDescription><![CDATA[importe exonerado del IGV  del documento]]></fieldDescription>
+	</field>
+	<field name="docu_gratuita" class="java.lang.String">
+		<fieldDescription><![CDATA[importe de valor gratuito  del documento]]></fieldDescription>
+	</field>
+	<field name="docu_descuento" class="java.lang.String">
+		<fieldDescription><![CDATA[importe de descuento del documento]]></fieldDescription>
+	</field>
+	<field name="docu_subtotal" class="java.lang.String">
+		<fieldDescription><![CDATA[importe subtotal del documento]]></fieldDescription>
+	</field>
+	<field name="docu_total" class="java.lang.String">
+		<fieldDescription><![CDATA[importe total  del documento
+/ importe total retenido]]></fieldDescription>
+	</field>
+	<field name="docu_igv" class="java.lang.String">
+		<fieldDescription><![CDATA[Importe del IGV del documento]]></fieldDescription>
+	</field>
+	<field name="tasa_igv" class="java.lang.String">
+		<fieldDescription><![CDATA[Tasa del IGV =18]]></fieldDescription>
+	</field>
+	<field name="docu_isc" class="java.lang.String">
+		<fieldDescription><![CDATA[Importe  del ISC]]></fieldDescription>
+	</field>
+	<field name="tasa_isc" class="java.lang.String">
+		<fieldDescription><![CDATA[Tasa ISC]]></fieldDescription>
+	</field>
+	<field name="docu_otrostributos" class="java.lang.String">
+		<fieldDescription><![CDATA[Otros importes de otros tributos]]></fieldDescription>
+	</field>
+	<field name="tasa_otrostributos" class="java.lang.String">
+		<fieldDescription><![CDATA[Tasa de otros tributos]]></fieldDescription>
+	</field>
+	<field name="docu_otroscargos" class="java.lang.String">
+		<fieldDescription><![CDATA[Otros cargos]]></fieldDescription>
+	</field>
+	<field name="docu_percepcion" class="java.lang.String">
+		<fieldDescription><![CDATA[Importe de percepcion]]></fieldDescription>
+	</field>
+	<field name="hashcode" class="java.lang.String">
+		<fieldDescription><![CDATA[Has code de la impresion
+
+sYlI7o6ndTiOEYz+Yv4jmz3CnWY=]]></fieldDescription>
+	</field>
+	<field name="cdr" class="java.lang.String">
+		<fieldDescription><![CDATA[Estado del CDR]]></fieldDescription>
+	</field>
+	<field name="cdr_nota" class="java.lang.String">
+		<fieldDescription><![CDATA[Nota del CDR]]></fieldDescription>
+	</field>
+	<field name="cdr_observacion" class="java.lang.String">
+		<fieldDescription><![CDATA[Notas de Observaciones del CDR]]></fieldDescription>
+	</field>
+	<field name="docu_enviaws" class="java.lang.String">
+		<fieldDescription><![CDATA[Estado si el documento se envia al ws de SUNAT
+S- Si se envia.
+N- No se envia.]]></fieldDescription>
+	</field>
+	<field name="docu_proce_status" class="java.lang.String">
+		<fieldDescription><![CDATA[N - Nuevo
+B - Bloqueo
+P - Proceso-
+E - Enviado
+X - Error de Envio]]></fieldDescription>
+	</field>
+	<field name="docu_proce_fecha" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="docu_link_pdf" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="docu_link_cdr" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="docu_link_xml" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="clie_correo_cpe1" class="java.lang.String">
+		<fieldDescription><![CDATA[Correo cliente 1]]></fieldDescription>
+	</field>
+	<field name="clie_correo_cpe2" class="java.lang.String">
+		<fieldDescription><![CDATA[Correo cliente 2]]></fieldDescription>
+	</field>
+	<field name="idventa" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipodoccli" class="java.lang.String"/>
+	<variable name="docu_codigo" class="java.lang.String">
+		<variableExpression><![CDATA[$F{docu_codigo}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="171" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="79" y="105" width="78" height="12" uuid="300e302c-f48e-4765-ace4-88f8ae4c9a4e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="192" height="13" uuid="822e1cf7-68a5-4f12-925c-399fb9b8150d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empr_razonsocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="12" width="192" height="12" uuid="d6217ddf-a4dc-4510-a4dd-97642931af36"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empr_nombrecomercial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="31" y="23" width="87" height="12" uuid="8aca8ca5-b6f5-498c-86b6-3e48bc0e162e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empr_direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="118" y="24" width="40" height="12" uuid="1fcf8f29-dae0-4235-a9db-c49808146028"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empr_distrito}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="54" y="34" width="25" height="12" uuid="8e04b967-0d18-45a0-acc1-28dbb20c3738"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[RUC: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="79" y="34" width="73" height="12" uuid="dbc4d36b-74e6-4e36-8df6-d88b09ba9e62"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empr_nroruc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="58" width="192" height="12" uuid="2c787995-fec1-44da-8ec4-6099213a4940"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[BOLETA DE VENTA ELECTRÓNICA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="69" width="192" height="13" uuid="57f9b7fe-56e6-41ea-be49-a16c6f4d942a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{docu_numero}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="93" width="79" height="12" uuid="227a46fc-761e-4dd5-9494-fa3dcda1dec0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[FECHA DE EMISIÓN:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="79" y="93" width="78" height="12" uuid="4ea7ddc6-d066-4404-9bc0-86662e706607"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{docu_fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="121" width="41" height="12" uuid="05e39875-2d18-4bac-8ded-bec4de6d7334"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CLIENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="105" width="79" height="12" uuid="ad15a6e4-878d-472c-a37e-956d9f441732"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[FECHA DE IMPRESIÓN:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1" y="155" width="191" height="12" uuid="e1397f7b-ef7c-4647-84eb-92886201392a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clie_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="144" width="74" height="11" uuid="c78f34fc-b260-41db-bf35-aaa3cf7b055d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clie_numero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="133" width="192" height="11" uuid="73f6d093-1f71-4027-8e71-4a380095cce2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipodoccli}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="2"/>
+	</pageHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="192" height="14" uuid="002e08d6-94da-438f-991a-c50331a42435"/>
+				<subreportParameter name="idVenta">
+					<subreportParameterExpression><![CDATA[$P{idVenta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cabeId">
+					<subreportParameterExpression><![CDATA[$F{docu_codigo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ticket_detalleBolElectrocina.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="318">
+			<staticText>
+				<reportElement x="0" y="5" width="79" height="11" uuid="b9593340-9b63-4bea-9ba9-04bf262d6d40"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[OP. GRABADA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="79" height="11" uuid="62aa97c3-c9ec-4933-a1a7-60c659682356"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[OP. INAFECTA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="25" width="78" height="11" uuid="5d4c0eba-c9e9-4b0a-8945-4cd05ad75406"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[OP. EXONERADA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="35" width="78" height="11" uuid="9d64707f-a6cb-4f88-a22c-644889604494"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[DESCUENTO GLOBAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="45" width="78" height="11" uuid="d5e3991f-5b43-4f0d-9baa-7b7fb2daedf9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IMPORTE TOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="98" width="117" height="12" uuid="d5c3d2ec-8be0-4357-9f2a-0b41ce61454e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[TIPO DE MONEDA:  S/ SOLES]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="79" y="5" width="58" height="11" uuid="9b7b9af9-a013-47b1-8ca4-6221ea133f59"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{docu_gravada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="15" width="58" height="11" uuid="57edf319-d7e6-41fb-bb6d-f522f5763f24"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{docu_inafecta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="25" width="58" height="11" uuid="40da8413-9d9c-4729-b079-d8baf0caabe6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{docu_exonerada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="35" width="58" height="11" uuid="944d847d-0dac-46f1-8490-06e1d50a94a0"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{docu_descuento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="45" width="58" height="11" uuid="0080d88a-170d-4714-805e-0f9e5d8167c1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{docu_total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="55" width="78" height="11" uuid="2ab04e51-53e1-4e83-bddf-af9eef75f6d5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[IGV:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="79" y="55" width="58" height="11" uuid="2da1b65f-accb-459c-a887-c028237a494c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{docu_igv}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="121" width="191" height="11" uuid="1018790e-7d6f-44d1-8bda-5e8d6b5fc7d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hashcode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="141" width="192" height="12" uuid="cf89d1f2-5c4e-446e-b674-9a7fa30d26d3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Representación Impresa de la Boleta de Venta Electrónica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="175" width="192" height="11" uuid="4237f540-92e1-4517-b360-92c1c62d90a9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Consulte en: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="185" width="192" height="11" uuid="19a75784-6b54-4f49-bf78-974b3d67bbd1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[https://www.boticavirgendelcarmen/docelectronico/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="206" width="192" height="11" uuid="ac45ce30-e361-4fcc-bd4c-e0e739a8009f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[GRACIAS POR SU COMPRA!]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="0" width="191" height="1" uuid="427f8c55-7f3b-45b9-9d92-4ce28d4bde0d"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField pattern="">
+				<reportElement x="19" y="86" width="173" height="11" uuid="5927feb7-9bd4-40b7-a246-654dbe44ac13"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{montoLetra}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="86" width="18" height="11" uuid="c4b60c6e-157f-48a6-ac1d-30ffa9e182c7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[SON:]]></text>
+			</staticText>
+			<image onErrorType="Blank">
+				<reportElement x="46" y="217" width="100" height="100" uuid="ddc66aa4-c379-4b94-a2ee-7fa16388481f"/>
+				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(
+	new com.google.zxing.qrcode.QRCodeWriter().encode(
+	$F{empr_nroruc}+" | BOLETA DE VENTA | "+$F{docu_numero}+" | "+$F{docu_igv}+" | "+$F{docu_total}+" | "+$F{docu_fecha}+" | "+$F{tipodoccli}+" | "+$F{clie_numero}+" | "+$F{hashcode},
+	com.google.zxing.BarcodeFormat.QR_CODE, 400,400))]]></imageExpression>
+			</image>
+		</band>
+	</columnFooter>
+</jasperReport>

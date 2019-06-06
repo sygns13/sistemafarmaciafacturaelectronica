@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ordenDePedido" language="groovy" pageWidth="595" pageHeight="575" columnWidth="576" leftMargin="19" rightMargin="0" topMargin="22" bottomMargin="28" uuid="a15f6b49-c2e0-40a4-857c-0ca95bf69646">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="29"/>
+	<parameter name="idVenta" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\J&M System - Soft\\Sistema-Ferreteria\\Sistema-Ferreteria\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT v.`idVenta`, c.`dniRuc`, concat(c.`nomcte`,'      -     ',tele)as nomcte, c.`direc`,c.tele, v.`subTotalInafecto`,ROUND(v.`subTotalAfecto`+v.`igv`,2) AS subTotalAfecto,ROUND(v.`subTotalInafecto`+v.`subTotalAfecto`+v.`igv`,2) AS total,
+date_format(v.`fecha`,'%d') AS dia,
+date_format(v.`fecha`,'%m')AS mes,date_format(v.`fecha`,'%y') AS anio ,CONCAT(' N° ', co.`serie`,' - ' ,co.`numero`) as comprobante FROM venta v, cliente c,comprobante co
+WHERE v.`idCliente`=c.`idCliente` AND v.`idVenta`=$P{idVenta} and v.idcomprobante=co.idcomprobante;]]>
+	</queryString>
+	<field name="idVenta" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dniRuc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomcte" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tele" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="subTotalInafecto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="subTotalAfecto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dia" class="java.lang.String"/>
+	<field name="mes" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="anio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="comprobante" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="161" splitType="Stretch">
+			<rectangle radius="3">
+				<reportElement x="79" y="81" width="279" height="25" backcolor="#666666" uuid="fb260671-e355-46f1-82ec-f4e2ac0de7c6"/>
+			</rectangle>
+			<textField>
+				<reportElement x="73" y="125" width="305" height="17" uuid="7e2e9db0-bc56-4818-a6be-144a95cd6201"/>
+				<textFieldExpression><![CDATA[$F{nomcte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="55" y="109" width="34" height="17" uuid="9ffb8813-84e7-499b-96c4-828dc278b209"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{dia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="109" width="34" height="17" uuid="afaaa10a-7e00-4f3e-b12b-c14649316bd6"/>
+				<textFieldExpression><![CDATA[$F{mes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="109" width="34" height="17" uuid="e9bc10ab-6bdb-41f7-96a2-40ddcef30914"/>
+				<textFieldExpression><![CDATA[$F{anio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="143" width="305" height="17" uuid="1371d71f-ddc6-400e-9126-fc9949876541"/>
+				<textFieldExpression><![CDATA[$F{direc}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="362" y="11" width="206" height="93" uuid="2b302cce-045f-4417-a9c5-d228ff4a4c6c"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="366" y="42" width="197" height="22" uuid="4d272ea2-d723-409a-bf3b-9bac6fb1b26a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ORDEN DE PEDIDO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="365" y="14" width="200" height="87" uuid="8cc4daa6-0c34-4d57-b723-11537f41badb"/>
+			</rectangle>
+			<line>
+				<reportElement x="365" y="65" width="200" height="1" uuid="16ca272e-895e-41c0-ba1b-225f97b67a03"/>
+			</line>
+			<line>
+				<reportElement x="365" y="40" width="200" height="1" uuid="023099d6-64c5-4ffd-92bf-41446e47059b"/>
+			</line>
+			<staticText>
+				<reportElement x="366" y="18" width="197" height="22" uuid="39bc4207-b77e-47bf-85ce-4e22bde82a6a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R.U.C.  10320432591]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="378" y="72" width="168" height="20" uuid="09bfe265-21a3-47f5-a1fa-6a5348a8ed00"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{comprobante}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="3" width="89" height="71" uuid="7ec4e59b-2061-4cd0-bc7e-7ebe7dbc459a"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="9" y="110" width="46" height="17" uuid="bfb88d94-5a6d-4e6d-9688-7974eccd0178"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="126" width="46" height="17" uuid="d3ccacfd-6e72-443a-a961-9571f17cc31f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="143" width="46" height="17" uuid="e149fcb7-ff4a-4c37-81fa-5c5b693fc153"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="193" y="60" width="84" height="15" uuid="44c5028c-06a8-4dce-a231-0552d85c73e2"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[regalos y otros.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="98" y="33" width="262" height="15" uuid="67f2d762-27e6-4bb7-bf65-5b393106b053"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Venta de medicamentos comerciales,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="46" width="133" height="15" uuid="c8a95b9f-054c-4fc8-b334-381786239761"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[artículos de tocador, perfumes,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="88" width="230" height="15" forecolor="#FFFFFF" uuid="cc2a3f74-3aa7-44e0-a3b5-9b4d172c74a7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jr. Comercio N° 185 Barrio San Martín]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="11" width="257" height="23" uuid="1b0e9409-0f80-44f9-91e6-f63bac89d72d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Botica "Virgen del Carmen"]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="342" splitType="Stretch">
+			<subreport>
+				<reportElement x="13" y="0" width="552" height="342" uuid="f23c0109-2159-4b4f-9f41-8586bf1b8d1f"/>
+				<subreportParameter name="idVenta">
+					<subreportParameterExpression><![CDATA[$P{idVenta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ordenDePedido_detalle1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="333" y="0" width="62" height="17" uuid="b4ecaf39-ffea-48b2-8ec0-fbee59623e66"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="296" y="0" width="47" height="17" uuid="faa1a75c-3ad9-4b7f-93a6-3ac9b9644051"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total  S/.]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

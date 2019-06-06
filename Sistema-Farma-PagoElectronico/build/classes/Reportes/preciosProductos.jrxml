@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="preciosProductos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cbebdba2-931d-4802-aac8-f32ea33e80f0">
+	<property name="ireport.zoom" value="1.6528925619834718"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["D:\\NetBeansProjects\\VentasAgronel\\src\\jym\\agronel\\imagenes\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT `Producto` as Producto, `Unidad`, `Precxmenor`, `Precxmayor`, `precioCompra`, `Codigo`,`Marca`  FROM `vta_catalogo`
+ORDER BY `Producto`;]]>
+	</queryString>
+	<field name="Producto" class="java.lang.String"/>
+	<field name="Unidad" class="java.lang.String"/>
+	<field name="Precxmenor" class="java.math.BigDecimal"/>
+	<field name="Precxmayor" class="java.math.BigDecimal"/>
+	<field name="precioCompra" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Codigo" class="java.lang.String"/>
+	<field name="marca" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="50" y="8" width="104" height="58" uuid="64382fd1-c317-47ba-b128-548adc9c44ba"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="28" width="555" height="20" uuid="cb6434bf-b01d-4dd5-b81c-00477e63f377"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LISTADO DE PRECIOS DE PRODUCTOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="17" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="2" width="555" height="15" uuid="3692f916-be35-491a-948d-9a03a3108f4e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="83" y="2" width="148" height="15" uuid="27238a2f-684b-4606-8537-3f1ab5a2a681"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="2" width="72" height="15" uuid="6c69999b-0544-41bb-81d0-61ab182be544"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="464" y="2" width="91" height="15" uuid="d8a394bb-274d-489b-90ed-4cc481ba8632"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prec.Venta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="2" width="92" height="15" uuid="534ffcc2-0d3e-495d-ba81-7d86d63be50f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prec Compra]]></text>
+			</staticText>
+			<line>
+				<reportElement x="296" y="2" width="1" height="15" uuid="7ed48822-572e-47e3-be6f-fdb0db1065d8"/>
+			</line>
+			<line>
+				<reportElement x="369" y="2" width="1" height="15" uuid="c2dc60e3-a6fb-4266-9066-58ab9b5c76db"/>
+			</line>
+			<line>
+				<reportElement x="462" y="2" width="1" height="15" uuid="a6e74790-deb2-4e68-b3d2-2bdcacf244e7"/>
+			</line>
+			<line>
+				<reportElement x="82" y="2" width="1" height="15" uuid="da0ddcf4-d877-40b7-82b4-17d82e94f0ac"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="2" width="81" height="13" uuid="8e378518-6024-44c0-ae93-3ec0b4d3cd73"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<line>
+				<reportElement x="232" y="2" width="1" height="15" uuid="45e21b24-65ea-4621-aaf9-4c68e4d15e46"/>
+			</line>
+			<staticText>
+				<reportElement x="235" y="4" width="57" height="13" uuid="c871f275-c77b-4738-9af5-ac2a495391c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laboratorio]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="15" uuid="dba2be1c-760e-45b1-a899-24471d8cc853"/>
+			</rectangle>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="298" y="0" width="71" height="15" uuid="d2b89907-497b-4034-a287-93f5eff0570d"/>
+				<textFieldExpression><![CDATA[$F{Unidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="370" y="0" width="92" height="15" uuid="5c70f5bb-7ea8-4921-8aef-cad4e3f4b501"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{precioCompra}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="81" height="15" uuid="d85eefed-faf3-4800-b566-6e43141ada4a"/>
+				<textFieldExpression><![CDATA[$F{Codigo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="83" y="0" width="148" height="15" uuid="0739a56f-68c9-4332-b15f-2d331cf7d095"/>
+				<textFieldExpression><![CDATA[$F{Producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="235" y="0" width="61" height="15" uuid="e69629aa-71aa-4c26-906a-b30072cb9bc1"/>
+				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Transparent" x="82" y="0" width="150" height="15" uuid="bf264523-1182-4dec-b875-1de32b86a4a5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="297" height="15" uuid="dd4f007a-561a-46cc-8533-b6902b3e7c61"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Transparent" x="370" y="0" width="185" height="15" uuid="754e6a06-6aec-4e55-9f22-9bf8923192bc"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Transparent" x="463" y="0" width="92" height="15" uuid="202b5636-66c9-457d-9e4e-a76aa78d20cb"/>
+			</rectangle>
+			<textField pattern="#,##0.00">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="462" y="0" width="91" height="15" uuid="5ad3ac2d-0d86-4e31-b877-f09fc2a1ea49"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{Precxmenor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

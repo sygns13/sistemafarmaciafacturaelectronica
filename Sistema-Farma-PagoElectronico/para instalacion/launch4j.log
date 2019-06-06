@@ -1,0 +1,207 @@
+
+
+Version:	3.5
+CmdLine:	D:\NetBeansProjects\VentasAgronel\launch.exe --l4j-debug
+WOW64:		yes
+Working dir:	D:\NetBeansProjects\VentasAgronel\.
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7
+Check launcher:	C:\Program Files\Java\jre7\bin\javaw.exe (OK)
+Match:		1.7
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7.0_67
+Check launcher:	C:\Program Files\Java\jre7\bin\javaw.exe (OK)
+Match:		1.7.0_67
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8
+Check launcher:	C:\Program Files\Java\jre8\bin\javaw.exe (OK)
+Match:		1.8
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_05
+Check launcher:	C:\Program Files\Java\jre8\bin\javaw.exe (OK)
+Match:		1.8.0_05
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7.0_67
+Ignore:		1.7.0_67
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_05
+Ignore:		1.8.0_05
+Runtime used:	1.8.0_05 (64-bit)
+Launcher:	C:\Program Files\Java\jre8\bin\javaw.exe
+Launcher args:	-jar "D:\NetBeansProjects\VentasAgronel\launch.exe"
+Args length:	51/32768 chars
+Error msg:	An error occurred while starting the application.
+
+
+Version:	3.5
+CmdLine:	D:\NetBeansProjects\VentasAgronel\launch.exe --l4j-debug
+WOW64:		yes
+Working dir:	D:\NetBeansProjects\VentasAgronel\.
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7
+Check launcher:	C:\Program Files\Java\jre7\bin\javaw.exe (OK)
+Match:		1.7
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7.0_67
+Check launcher:	C:\Program Files\Java\jre7\bin\javaw.exe (OK)
+Match:		1.7.0_67
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8
+Check launcher:	C:\Program Files\Java\jre8\bin\javaw.exe (OK)
+Match:		1.8
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_05
+Check launcher:	C:\Program Files\Java\jre8\bin\javaw.exe (OK)
+Match:		1.8.0_05
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7.0_67
+Ignore:		1.7.0_67
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_05
+Ignore:		1.8.0_05
+Runtime used:	1.8.0_05 (64-bit)
+Launcher:	C:\Program Files\Java\jre8\bin\javaw.exe
+Launcher args:	-jar "D:\NetBeansProjects\VentasAgronel\launch.exe"
+Args length:	51/32768 chars
+Error msg:	An error occurred while starting the application.
+
+
+Version:	3.5
+CmdLine:	D:\NetBeansProjects\VentasAgronel\launch.exe --l4j-debug
+WOW64:		yes
+Working dir:	D:\NetBeansProjects\VentasAgronel\.
+Bundled JRE:	C:\Program Files\Java\jre7\bin
+Check launcher:	C:\Program Files\Java\jre7\bin\bin\javaw.exe (not found)
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7
+Check launcher:	C:\Program Files\Java\jre7\bin\javaw.exe (OK)
+Match:		1.7
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7.0_67
+Check launcher:	C:\Program Files\Java\jre7\bin\javaw.exe (OK)
+Match:		1.7.0_67
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8
+Check launcher:	C:\Program Files\Java\jre8\bin\javaw.exe (OK)
+Match:		1.8
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_05
+Check launcher:	C:\Program Files\Java\jre8\bin\javaw.exe (OK)
+Match:		1.8.0_05
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7.0_67
+Ignore:		1.7.0_67
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_05
+Ignore:		1.8.0_05
+Runtime used:	1.8.0_05 (64-bit)
+Launcher:	C:\Program Files\Java\jre8\bin\javaw.exe
+Launcher args:	-jar "D:\NetBeansProjects\VentasAgronel\launch.exe"
+Args length:	51/32768 chars
+Error msg:	An error occurred while starting the application.
+
+
+Version:	3.5
+CmdLine:	D:\NetBeansProjects\VentasAgronel\launch.exe --l4j-debug
+WOW64:		yes
+Working dir:	D:\NetBeansProjects\VentasAgronel\.
+Bundled JRE:	C:\Program Files\Java\jre7\bin
+Check launcher:	C:\Program Files\Java\jre7\bin\bin\javaw.exe (not found)
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7
+Check launcher:	C:\Program Files\Java\jre7\bin\javaw.exe (OK)
+Match:		1.7
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7.0_67
+Check launcher:	C:\Program Files\Java\jre7\bin\javaw.exe (OK)
+Match:		1.7.0_67
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8
+Check launcher:	C:\Program Files\Java\jre8\bin\javaw.exe (OK)
+Match:		1.8
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_05
+Check launcher:	C:\Program Files\Java\jre8\bin\javaw.exe (OK)
+Match:		1.8.0_05
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7.0_67
+Ignore:		1.7.0_67
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_05
+Ignore:		1.8.0_05
+Runtime used:	1.8.0_05 (64-bit)
+Add classpath:	lib\AbsoluteLayout.jar
+Add classpath:	lib\AbsoluteLayout.jar
+Add classpath:	lib\commons-collections-3.2.1.jar
+Add classpath:	lib\commons-digester-2.1.jar
+Add classpath:	lib\commons-logging-1.1.jar
+Add classpath:	lib\jcalendar-1.4.jar
+Add classpath:	lib\mysql-connector-java-5.1.7-bin.jar
+Add classpath:	lib\substance.jar
+Add classpath:	lib\jxl.jar
+Add classpath:	lib\jasperreports-5.6.0.jar
+Add classpath:	lib\groovy-all-2.0.1.jar
+Launcher:	C:\Program Files\Java\jre8\bin\javaw.exe
+Launcher args:	-classpath "D:\NetBeansProjects\VentasAgronel\launch.exe;lib\AbsoluteLayout.jar;lib\AbsoluteLayout.jar;lib\commons-collections-3.2.1.jar;lib\commons-digester-2.1.jar;lib\commons-logging-1.1.jar;lib\jcalendar-1.4.jar;lib\mysql-connector-java-5.1.7-bin.jar;lib\substance.jar;lib\jxl.jar;lib\jasperreports-5.6.0.jar;lib\groovy-all-2.0.1.jar" jym.agronel.ventanas.Acceso
+Args length:	366/32768 chars
+Error msg:	An error occurred while starting the application.
+
+
+Version:	3.5
+CmdLine:	D:\NetBeansProjects\VentasAgronel\launch.exe --l4j-debug
+WOW64:		yes
+Working dir:	D:\NetBeansProjects\VentasAgronel\.
+Bundled JRE:	C:\Program Files\Java\jre7\
+Check launcher:	C:\Program Files\Java\jre7\bin\javaw.exe (OK)
+Launcher:	C:\Program Files\Java\jre7\bin\javaw.exe
+Launcher args:	-jar "D:\NetBeansProjects\VentasAgronel\launch.exe"
+Args length:	51/32768 chars
+Error msg:	An error occurred while starting the application.
+
+
+Version:	3.5
+CmdLine:	D:\NetBeansProjects\VentasAgronel\launch.exe --l4j-debug
+WOW64:		yes
+Working dir:	D:\NetBeansProjects\VentasAgronel\.
+Bundled JRE:	C:\Program Files\Java\jre7
+Check launcher:	C:\Program Files\Java\jre7\bin\javaw.exe (OK)
+Launcher:	C:\Program Files\Java\jre7\bin\javaw.exe
+Launcher args:	-jar "D:\NetBeansProjects\VentasAgronel\launch.exe"
+Args length:	51/32768 chars
+Exit code:	0
+
+
+Version:	3.5
+CmdLine:	D:\NetBeansProjects\VentasAgronel\launch.exe --l4j-debug
+WOW64:		yes
+Working dir:	D:\NetBeansProjects\VentasAgronel\.
+Bundled JRE:	C:\Program Files\Java\jre7
+Check launcher:	C:\Program Files\Java\jre7\bin\javaw.exe (OK)
+Launcher:	C:\Program Files\Java\jre7\bin\javaw.exe
+Launcher args:	-jar "D:\NetBeansProjects\VentasAgronel\launch.exe"
+Args length:	51/32768 chars
+Exit code:	0
+
+
+Version:	3.5
+CmdLine:	D:\NetBeansProjects\VentasAgronel\para instalacion\launch.exe --l4j-debug
+WOW64:		yes
+Working dir:	D:\NetBeansProjects\VentasAgronel\para instalacion\.
+Bundled JRE:	C:\Program Files\Java\jre7
+Check launcher:	C:\Program Files\Java\jre7\bin\javaw.exe (OK)
+Launcher:	C:\Program Files\Java\jre7\bin\javaw.exe
+Launcher args:	-jar "D:\NetBeansProjects\VentasAgronel\para instalacion\launch.exe"
+Args length:	68/32768 chars
+Exit code:	0
+
+
+Version:	3.5
+CmdLine:	D:\NetBeansProjects\VentasAgronel\para instalacion\launch.exe --l4j-debug
+WOW64:		yes
+Working dir:	D:\NetBeansProjects\VentasAgronel\para instalacion\.
+Bundled JRE:	C:\Program Files\Java\jre7
+Check launcher:	C:\Program Files\Java\jre7\bin\javaw.exe (OK)
+Launcher:	C:\Program Files\Java\jre7\bin\javaw.exe
+Launcher args:	-jar "D:\NetBeansProjects\VentasAgronel\para instalacion\launch.exe"
+Args length:	68/32768 chars
+Exit code:	0
